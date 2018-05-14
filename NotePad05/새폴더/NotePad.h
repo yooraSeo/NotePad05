@@ -22,6 +22,7 @@ class CharacterMatrix;
 class CaretController;
 class GlyphFactory;
 class KeyAction;
+class MouseAction;
 
 class NotePad :public CFrameWnd, public Subject {
 public:
@@ -33,8 +34,8 @@ public:
 	UINT GetNChar() const;
 	Glyph* SetPaper(Glyph* paper);
 	Glyph* SetLine(Glyph* line);
+	
 private:
-
 	string name;
 	Glyph* paper;
 	Glyph* line;
@@ -45,12 +46,16 @@ private:
 	CaretController* caretController;
 	GlyphFactory* glyphFactory;
 	KeyAction* keyAction;
+	MouseAction *mouseAction;
 
 protected:	
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnPaint();	
 	afx_msg void OnChar(UINT nChar,UINT nRepCnt,UINT nFlags);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg LRESULT OnImeChar(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnImeComposition(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnImeStartComposition(WPARAM wParam, LPARAM lParam);

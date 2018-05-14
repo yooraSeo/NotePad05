@@ -39,7 +39,7 @@ Positioner& Positioner::operator=(const Positioner& source) {
 	return *this;
 }
 
-Long Positioner::GetX(NotePad *notePad, Line* line, Long column) {
+Long Positioner::GetX(NotePad *notePad, Glyph* line, Long column) {
 	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
 	string str;
 	Long i = 0;
@@ -60,6 +60,65 @@ Long Positioner::GetX(NotePad *notePad, Line* line, Long column) {
 
 Long Positioner::GetY(NotePad *notePad, Long row) {
 	CharacterMatrix* charactermatrix = CharacterMatrixSingletonPattern::Instance(notePad);
-	this->y = (charactermatrix->GetHeigh())*row;
+	this->y = (charactermatrix->GetHeigh())*(row-1);
 	return this->y;
 }
+
+Long Positioner::GetRow(NotePad *notePad,Glyph *paper ,Long y) {
+	CharacterMatrix* charactermatrix = CharacterMatrixSingletonPattern::Instance(notePad);
+	if (y >= 0 && y < this->GetY(notePad, paper->GetLength())) {
+		this->row = y / charactermatrix->GetHeigh();
+	}
+	else {
+		this->row = paper->GetLength();
+	}
+	return this->row;
+}
+
+Long Positioner::GetColumn(NotePad *notePad, Glyph* line, Long x) {
+	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
+	Long lengX = this->GetX(notePad, line, line->GetLength());
+	Long leng = line->GetLength();
+	Long sumX = this->GetX(notePad, line, 0);
+	Long i = 1;
+	Long prevX = 0;
+	if (x<this->GetX(notePad,line,1)) {
+		this->column = 0;
+	}
+	else if (x < lengX) {
+		while (i < leng && sumX < x) {
+			prevX = sumX;
+			sumX = this->GetX(notePad, line, i);
+			i++;
+		}
+		if (prevX - x > sumX - x) {
+			this->column = i-1;
+		}
+		else {
+			this->column = i -2;
+		}
+	}
+	else if (x >= lengX || i >= leng) {
+		this->column = leng;
+	}
+	return this->column;
+}
+
+
+//	Long i = 0;
+//	Long xOne = 0;
+//	Long y = this->GetX(notePad, line, line->GetLength());
+//	if (x >=0 && x < y) {
+//		while (xOne < x && i <= line->GetLength()) {
+//			xOne = this->GetX(notePad, line, i);
+//			i++;
+//		}
+//		if(this->)
+//		this->column = i - 2;
+//		
+//	}
+//	else {
+//		this->column = line->GetLength();
+//	}
+//	return this->column;
+//}

@@ -18,12 +18,20 @@ public:
 	KeyAction();	
 	KeyAction(NotePad* notePad);
 	~KeyAction();
-	void Action(UINT nChar);
+	CPoint HomeKey(UINT nChar);
+	CPoint EndKey(UINT nChar);
+	CPoint LeftKey(UINT nChar);
+	CPoint RightKey(UINT nChar);
+	CPoint UpKey(UINT nChar);
+	CPoint DownKey(UINT nChar);
+	CPoint Priorkey(UINT nChar);
+	CPoint NextKey(UINT nChar);
 private:
 	NotePad * notePad;
 	Positioner* positioner;
 	Long column;
 	Long row;
+	CPoint point;
 };
 
 #endif // !_KEYACTION_H

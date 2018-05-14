@@ -9,197 +9,299 @@
 #include "KeyAction.h"
 #include "NotePad.h"
 #include "Positioner.h"
-#include "CharacterMatrixSingletonPattern.h"
 #include "Paper.h"
 #include "Line.h"
-#include "CharacterMatrix.h"
-#include "SingleByteCharacter.h"
-#include "DoubleByteCharacter.h"
 KeyAction::KeyAction() {
 	this->notePad = 0;
 	this->positioner = 0;
+	this->row = 0;
+	this->column = 0;
 }
 KeyAction::KeyAction(NotePad* notePad) {
 	this->notePad = notePad;
 	this->positioner = new Positioner();
+	this->row = notePad->GetPaper()->GetCurrent();
+	this->column = notePad->GetLine()->GetCurrent();
 }
 KeyAction::~KeyAction() {
 
 }
 
-void KeyAction::Action(UINT nChar) {
-	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
-	CPoint point = this->notePad->GetCaretPos();
+CPoint KeyAction::HomeKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
 	Paper* paper = (Paper*)this->notePad->GetPaper();
-	Line* line = (Line*)this->notePad->GetLine();
 	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
 	this->column = line->GetCurrent();
-	if (nChar == VK_HOME) {
-		this->column = line->First();
-		line->SetCurrent(this->column);
-		this->notePad->SetLine(line);
-		this->notePad->Notify();
-		this->notePad->Invalidate();
-	}
-	else if (nChar == VK_END) {
-		//this->notePad->SetLine(line);
-		this->column = line->Last();
-		line->SetCurrent(this->column);
-		this->notePad->SetLine(line);
-		this->notePad->Notify();
-		this->notePad->Invalidate();
-	}
-	else if (nChar == VK_LEFT) { //left arrow key		
-		if (this->column > 0 || point.x != positioner->GetX(this->notePad, line, this->column)) {
-			if (point.x == positioner->GetX(this->notePad, line, this->column)) {
-				this->column = line->Prev();
-			}
-		}
-		else if (this->column <= 0 && this->row > 0) {
-			this->row = paper->Prev();
-			line = (Line*)paper->GetAt(this->row);
-			this->notePad->SetPaper(paper);
-			this->column = line->Last();
-		}
-		line->SetCurrent(this->column);
-		this->notePad->SetLine(line);
-		this->notePad->Notify();
-		notePad->Invalidate();
-	}
+	this->column = line->First();
+	notePad->SetLine(line);
 
-	else if (nChar == VK_RIGHT) { //right arrow key
-		if (this->column < line->GetLength() || point.x < this->positioner->GetX(this->notePad,line,line->GetLength())) {
-			this->column = line->Next();
-		}
-		else if (this->column >= line->GetLength() && this->row < paper->GetLength() - 1) {
-			this->row = paper->Next();
-			line = (Line*)paper->GetAt(this->row);
-			this->notePad->SetPaper(paper);
-			this->column = line->First();
-		}
-		line->SetCurrent(this->column);
-		this->notePad->SetLine(line);
-		this->notePad->Notify();
-		this->notePad->Invalidate();
-	}
-
-	else if (nChar == VK_UP) { //up arrow key
-		if (this->row >= 0) {
-			point.x = this->positioner->GetX(this->notePad, line, this->column);
-			this->row = paper->Prev();
-			line = (Line*)paper->GetAt(this->row);
-			Long x = this->positioner->GetX(this->notePad, line, line->GetLength());
-			Long i = 0;
-			Long prevX = 0;
-			if (x > point.x) {
-				x = 0;
-				while (x < point.x && i < line->GetLength()) {
-					prevX = x;
-					x = this->positioner->GetX(this->notePad, line, i);
-					i++;
-				}
-				if (point.x - prevX > x - point.x) {
-					this->column = i - 1;
-				}
-				else {
-					this->column = i - 2;
-				}				
-			}
-			else {
-				if (this->column != line->GetLength() || point.x == x) {
-					this->column = line->Last();
-				}
-			}
-			line->SetCurrent(this->column);
-			this->notePad->SetLine(line);
-			this->notePad->Notify();
-			this->notePad->Invalidate();
-		}
-	}
-	else if (nChar == VK_DOWN) { //down arrow key
-		if (this->row < paper->GetLength()-1) {
-			point.x = this->positioner->GetX(this->notePad, line, this->column);
-			this->row = paper->Next();
-			line = (Line*)paper->GetAt(this->row);
-			Long x = this->positioner->GetX(this->notePad, line, line->GetLength());
-			Long i = 0;
-			Long prevX = 0;
-			if (x > point.x) {
-				x = 0;
-				while (x < point.x && i < line->GetLength()) {
-					prevX = x;
-					x = this->positioner->GetX(this->notePad, line, i);
-					i++;
-				}
-				if (point.x - prevX > x - point.x) {
-					this->column = i - 1;
-				}
-				else {
-					this->column = i - 2;
-				}
-			}
-			else {
-				if (this->column != line->GetLength() || point.x == x) {
-					this->column = line->Last();
-				}
-			}
-			line->SetCurrent(this->column);
-			this->notePad->SetLine(line);
-			this->notePad->Notify();
-			this->notePad->Invalidate();
-		}
-	}
-	else if (nChar == VK_PRIOR) { //page up key
-		this->column = line->GetCurrent();
-		this->row = paper->First();
-		this->notePad->SetPaper(paper);
-		line = (Line*)paper->GetAt(this->row);
-		if (line->GetLength() < this->column) {
-			this->column = line->Last();
-		}
-		line->SetCurrent(this->column);
-		this->notePad->SetLine(line);
-		this->notePad->Notify();
-		this->notePad->Invalidate();
-	}
-	else if (nChar == VK_NEXT) { //page down key
-		this->column = line->GetCurrent();
-		this->row = paper->Last();
-		this->row = paper->Prev();
-		this->notePad->SetPaper(paper);
-		line = (Line*)paper->GetAt(this->row);
-		if (line->GetLength() < this->column) {
-			this->column = line->Last();
-		}
-		line->SetCurrent(this->column);
-		this->notePad->SetLine(line);
-		this->notePad->Notify();
-		this->notePad->Invalidate();
-	}
+	this->notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	notePad->Invalidate();
+	return this->point;
 }
 
+CPoint KeyAction::EndKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
+	this->column = line->Last();
+	notePad->SetLine(line);
 
+	this->notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	notePad->Invalidate();
+	return this->point;
+}
+CPoint KeyAction::LeftKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
+	
+	if (this->column > 0 || point.x != positioner->GetX(notePad, line, this->column)) {
+		if (point.x == positioner->GetX(notePad, line, this->column)) {
+			this->column = line->Prev();
+		}
+	}
+	else if (this->row > 0) {
+		this->row = paper->Prev();
+		line = (Line*)paper->GetAt(this->row);
+		this->column = line->Last();
+		notePad->SetPaper(paper);
+	}
+	notePad->SetLine(line);
+	notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	notePad->Invalidate();
+	return this->point;
+}
+CPoint KeyAction::RightKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
+	
+	if (this->column < line->GetLength()) {
+		this->column = line->Next();
+	}
+	else if (this->row < paper->GetLength() - 1) {
+		this->row = paper->Next();
+		line = (Line*)paper->GetAt(this->row);
+		this->column = line->First();
+		notePad->SetPaper(paper);
+	}
+	notePad->SetLine(line);
+	notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	notePad->Invalidate();
+	return this->point;
+}
+CPoint KeyAction::UpKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
+	
+	if (this->row > 0) {
+		this->column = line->GetCurrent();
+		this->row = paper->Prev();
+		line = (Line*)paper->GetAt(this->row);
+		Long x = point.x;
+		Long leng = line->GetLength();
+		Long temp = 0;
+		Long sum = x - temp;
+		if (this->column <= leng) {
+			if (positioner->GetX(notePad, line, this->column) != x) {
+				Long i = 1;
+				while (i <= leng && positioner->GetX(notePad, line, i) < x) {
+					temp = positioner->GetX(notePad, line, i);
+					if (sum > x - temp) {
+						sum = x - temp;
+					}
+					i++;
+				}
+				if (i > leng) {
+					i = leng;
+				}
+				temp = positioner->GetX(notePad, line, i) - x;
+				if (i <= leng && sum < temp) {
+					this->column = i - 1;
+				}
+				else {
+					this->column = i;
+				}
+				line->SetCurrent(this->column);
+			}
+			else {
+				line->SetCurrent(this->column);
+			}
+		}
+		else {
+			if (positioner->GetX(notePad, line, leng) > x) {
+				Long i = 1;
+				while (i <= leng && positioner->GetX(notePad, line, i) < x) {
+					temp = positioner->GetX(notePad, line, i);
+					if (sum > x - temp) {
+						sum = x - temp;
+					}
+					i++;
+				}
+				if (i > leng) {
+					i = leng;
+				}
+				temp = positioner->GetX(notePad, line, i) - x;
+				if (i <= leng && sum < temp) {
+					this->column = i - 1;
+				}
+				else {
+					this->column = i;
+				}
+				line->SetCurrent(this->column);
+			}
+			else {
+				this->column = line->Last();
+			}
+		}
+	}
+	notePad->SetPaper(paper);
+	notePad->SetLine(line);
+	notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	notePad->Invalidate();
+	return this->point;
+}
+CPoint KeyAction::DownKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
+	
+	if (this->row < paper->GetLength() - 1) {
+		this->column = line->GetCurrent();
+		this->row = paper->Next();
+		line = (Line*)paper->GetAt(this->row);
+		Long x = point.x;
+		Long leng = line->GetLength();
+		Long temp = 0;
+		Long sum = x - temp;
+		if (this->column <= leng) {
+			if (positioner->GetX(notePad, line, this->column) != x) {
+				Long i = 1;
+				while (i <= leng && positioner->GetX(notePad, line, i) < x) {
+					temp = positioner->GetX(notePad, line, i);
+					if (sum > x - temp) {
+						sum = x - temp;
+					}
+					i++;
+				}
+				if (i > leng) {
+					i = leng;
+				}
+				temp = positioner->GetX(notePad, line, i) - x;
+				if (i <= leng && sum < temp) {
+					this->column = i - 1;
+				}
+				else {
+					this->column = i;
+				}
+				line->SetCurrent(this->column);
+			}
+			else {
+				line->SetCurrent(this->column);
+			}
+		}
+		else {
+			if (positioner->GetX(notePad, line, leng) > x) {
+				Long i = 1;
+				while (i <= leng && positioner->GetX(notePad, line, i) < x) {
+					temp = positioner->GetX(notePad, line, i);
+					if (sum > x - temp) {
+						sum = x - temp;
+					}
+					i++;
+				}
+				if (i > leng) {
+					i = leng;
+				}
+				temp = positioner->GetX(notePad, line, i) - x;
+				if (i <= leng && sum < temp) {
+					this->column = i - 1;
+				}
+				else {
+					this->column = i;
+				}
+				this->column = i;
+				line->SetCurrent(this->column);
+			}
+			else {
+				this->column = line->Last();
+			}
+		}
+	}
+	notePad->SetPaper(paper);
+	notePad->SetLine(line);
+	notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	notePad->Invalidate();
+	return this->point;
+}
+CPoint KeyAction::Priorkey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
+	
+	if (this->row != 0) {
+		this->column = line->GetCurrent();
+		this->row = paper->First();
+		line = (Line*)paper->GetAt(this->row);
+		if (this->column < line->GetLength()) {
+			line->SetCurrent(this->column);
+		}
+		else {
+			this->column = line->Last();
+		}
+		notePad->SetPaper(paper);
+		notePad->SetLine(line);
+		notePad->Notify();
+		this->point = this->notePad->GetCaretPos();
+		notePad->Invalidate();
+		return this->point;
+	}
 
+}
+CPoint KeyAction::NextKey(UINT nChar) {
+	point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)this->notePad->GetLine();
+	this->column = line->GetCurrent();
 
-//if (this->row > 0) {
-//	Long x = this->positioner->GetX(this->notePad, line, this->column);
-//	this->row = paper->Prev();
-//	line = (Line*)paper->GetAt(this->row);
-//	this->notePad->SetPaper(paper);
-//	Long nextX = this->positioner->GetX(this->notePad, line, line->GetLength());
-//	Long i = 0;
-//	if (x >= nextX) {
-//		this->column = line->Last();
-//	}
-//	else {
-//		nextX = 0;
-//		while (nextX < x && i < line->GetLength()) {
-//			nextX = this->positioner->GetX(this->notePad, line, i);
-//			i++;
-//		}
-//		this->column = i - 1;
-//	}
-//	this->notePad->SetLine(line);
-//	this->notePad->Notify();
-//	notePad->Invalidate();
-//}
+	if (this->row != paper->GetLength() - 1) {
+		this->column = line->GetCurrent();
+		paper->Last();
+		this->row = paper->Prev();
+		line = (Line*)paper->GetAt(this->row);
+		if (this->column < line->GetLength()) {
+			line->SetCurrent(this->column);
+		}
+		else {
+			this->column = line->Last();
+		}
+		notePad->SetPaper(paper);
+		notePad->SetLine(line);
+		notePad->Notify();
+		this->point = this->notePad->GetCaretPos();
+		notePad->Invalidate();
+		return this->point;
+	}
+}

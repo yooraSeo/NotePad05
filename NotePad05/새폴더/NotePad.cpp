@@ -21,6 +21,7 @@
 #include "SaveFile.h"
 #include "LoadFile.h"
 #include "KeyAction.h"
+#include "MouseAction.h"
 
 using namespace std;
 BEGIN_MESSAGE_MAP(NotePad, CFrameWnd)
@@ -28,6 +29,9 @@ BEGIN_MESSAGE_MAP(NotePad, CFrameWnd)
 	ON_WM_PAINT()
 	ON_WM_CHAR()
 	ON_WM_KEYDOWN()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+	ON_WM_LBUTTONDBLCLK()
 	ON_MESSAGE(WM_IME_CHAR, OnImeChar)
 	ON_MESSAGE(WM_IME_COMPOSITION, OnImeComposition)
 	ON_MESSAGE(WM_IME_STARTCOMPOSITION, OnImeStartComposition)
@@ -50,6 +54,7 @@ NotePad::NotePad() {
 	this->isComposition = FALSE;
 	this->glyphFactory = NULL;
 	this->keyAction = NULL;
+	this->mouseAction = NULL;
 }
 
 int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
@@ -64,6 +69,7 @@ int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	}
 	this->Notify();
 	this->keyAction = new KeyAction(this);
+	this->mouseAction = new MouseAction(this);
 
 
 #if 0
@@ -109,7 +115,7 @@ void NotePad::OnPaint() {
 	Long lows;
 	Long i = 0;
 	string text;
-	Glyph* line;
+	//Glyph* line;
 	Long height;
 	lows = this->paper->GetLength();
 	CPaintDC dc(this);
@@ -120,22 +126,22 @@ void NotePad::OnPaint() {
 	CString cstr; //화면에 출력한 문자열
 	char cha[20];
 	while (i < lows) {
-		line = this->paper->GetAt(i);
-		text = line->MakeString();
+		this->line = this->paper->GetAt(i);
+		text = this->line->MakeString();
 		height = this->characterMatrix->GetHeigh();
 		dc.TextOut(0, (i * height), CString(text.c_str()));
 		
 		CSize display_size = dc.GetTextExtent(text.c_str()); //화면에 쓰여진 문자열의 길이 구하기
 		num = display_size.cx; //문자열을 실수로 받음
-		line = paper->GetAt(paper->GetCurrent());
-		paper->Prev();
+		this->line = paper->GetAt(paper->GetCurrent());
 		cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,     조합 : %d",
-			paper->GetCurrent()+1,line->GetCurrent()+1,
+			paper->GetCurrent()+1,this->line->GetCurrent()+1,
 			this->GetCaretPos().x, this->GetCaretPos().y, this->isComposition);
 		dc.TextOut(600, 80, CString(cstr)); //출력
 
 		i++;
 	}
+	//GetConsoleCursorInfo()
 }
 
 void NotePad::OnClose() {
@@ -158,12 +164,49 @@ void NotePad::OnClose() {
 }
 
 void NotePad::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
-	if (nChar == VK_PRIOR || nChar == VK_NEXT || nChar == VK_HOME ||
-		nChar == VK_END || nChar == VK_LEFT || nChar == VK_RIGHT ||
-		nChar == VK_UP || nChar == VK_DOWN) {
-
-		this->keyAction->Action(nChar);
+	CPoint point;
+	switch (nChar)
+	{
+	case VK_PRIOR:
+		point = this->keyAction->Priorkey(nChar);
+		break;
+	case VK_NEXT:
+		point = this->keyAction->NextKey(nChar);
+		break;
+	case VK_HOME:
+		point = this->keyAction->HomeKey(nChar);
+		break;
+	case VK_END:
+		point = this->keyAction->EndKey(nChar);
+		break;
+	case VK_LEFT:
+		point = this->keyAction->LeftKey(nChar);
+		break;
+	case VK_RIGHT:
+		point = this->keyAction->RightKey(nChar);
+		break;
+	case VK_UP:
+		point = this->keyAction->UpKey(nChar);
+		break;
+	case VK_DOWN:
+		point = this->keyAction->DownKey(nChar);
+		break;
+	default: break;
 	}
+}
+
+void NotePad::OnLButtonDown(UINT nFlags, CPoint point) {
+	if (nFlags == MK_LBUTTON) {
+		this->mouseAction->Clicked(point);
+	}
+}
+
+void NotePad::OnLButtonUp(UINT nFlags, CPoint point) {
+
+}
+
+void NotePad::OnLButtonDblClk(UINT nFlags, CPoint point) {
+
 }
 
 void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
@@ -190,7 +233,6 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	else if (nChar == VK_ESCAPE) {
 		this->isComposition = FALSE;
 	}
-
 	if (this->isComposition != FALSE) {
 		this->isComposition = FALSE;
 	}
@@ -238,6 +280,7 @@ LRESULT NotePad::OnImeComposition(WPARAM wParam, LPARAM lParam) {
 		this->isComposition = TRUE;
 		this->Invalidate();
 	}
+	
 	this->Notify();
 	return ::DefWindowProc(this->m_hWnd, WM_IME_COMPOSITION, wParam, lParam);
 }

@@ -18,6 +18,57 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="새폴더\Array.cpp" />
+    <ClCompile Include="새폴더\Caret.cpp" />
+    <ClCompile Include="새폴더\CaretController.cpp" />
+    <ClCompile Include="새폴더\Character.cpp" />
+    <ClCompile Include="새폴더\CharacterMatrix.cpp" />
+    <ClCompile Include="새폴더\CharacterMatrixSingletonPattern.cpp" />
+    <ClCompile Include="새폴더\Composite.cpp" />
+    <ClCompile Include="새폴더\DoubleByteCharacter.cpp" />
+    <ClCompile Include="새폴더\Glyph.cpp" />
+    <ClCompile Include="새폴더\GlyphFactory.cpp" />
+    <ClCompile Include="새폴더\KeyAction.cpp" />
+    <ClCompile Include="새폴더\Line.cpp" />
+    <ClCompile Include="새폴더\LoadFile.cpp" />
+    <ClCompile Include="새폴더\MouseAction.cpp" />
+    <ClCompile Include="새폴더\NotePad.cpp" />
+    <ClCompile Include="새폴더\NotePadApp.cpp" />
+    <ClCompile Include="새폴더\Observer.cpp" />
+    <ClCompile Include="새폴더\Paper.cpp" />
+    <ClCompile Include="새폴더\Positioner.cpp" />
+    <ClCompile Include="새폴더\SaveFile.cpp" />
+    <ClCompile Include="새폴더\SingleByteCharacter.cpp" />
+    <ClCompile Include="새폴더\Subject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="새폴더\Array.h" />
+    <ClInclude Include="새폴더\Caret.h" />
+    <ClInclude Include="새폴더\CaretController.h" />
+    <ClInclude Include="새폴더\Character.h" />
+    <ClInclude Include="새폴더\CharacterMatrix.h" />
+    <ClInclude Include="새폴더\CharacterMatrixSingletonPattern.h" />
+    <ClInclude Include="새폴더\Composite.h" />
+    <ClInclude Include="새폴더\DoubleByteCharacter.h" />
+    <ClInclude Include="새폴더\Glyph.h" />
+    <ClInclude Include="새폴더\GlyphFactory.h" />
+    <ClInclude Include="새폴더\KeyAction.h" />
+    <ClInclude Include="새폴더\Line.h" />
+    <ClInclude Include="새폴더\LoadFile.h" />
+    <ClInclude Include="새폴더\MouseAction.h" />
+    <ClInclude Include="새폴더\NotePad.h" />
+    <ClInclude Include="새폴더\NotePadApp.h" />
+    <ClInclude Include="새폴더\Observer.h" />
+    <ClInclude Include="새폴더\Paper.h" />
+    <ClInclude Include="새폴더\Positioner.h" />
+    <ClInclude Include="새폴더\SaveFile.h" />
+    <ClInclude Include="새폴더\SingleByteCharacter.h" />
+    <ClInclude Include="새폴더\Subject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="새폴더\새메모장.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{CF00C51E-66B5-45C7-9994-D55AE19711A1}</ProjectGuid>
@@ -30,7 +81,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -88,6 +140,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -138,52 +191,6 @@
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="새폴더\Array.cpp" />
-    <ClCompile Include="새폴더\Caret.cpp" />
-    <ClCompile Include="새폴더\CaretController.cpp" />
-    <ClCompile Include="새폴더\Character.cpp" />
-    <ClCompile Include="새폴더\CharacterMatrix.cpp" />
-    <ClCompile Include="새폴더\CharacterMatrixSingletonPattern.cpp" />
-    <ClCompile Include="새폴더\Composite.cpp" />
-    <ClCompile Include="새폴더\DoubleByteCharacter.cpp" />
-    <ClCompile Include="새폴더\Glyph.cpp" />
-    <ClCompile Include="새폴더\GlyphFactory.cpp" />
-    <ClCompile Include="새폴더\KeyAction.cpp" />
-    <ClCompile Include="새폴더\Line.cpp" />
-    <ClCompile Include="새폴더\LoadFile.cpp" />
-    <ClCompile Include="새폴더\NotePad.cpp" />
-    <ClCompile Include="새폴더\NotePadApp.cpp" />
-    <ClCompile Include="새폴더\Observer.cpp" />
-    <ClCompile Include="새폴더\Paper.cpp" />
-    <ClCompile Include="새폴더\Positioner.cpp" />
-    <ClCompile Include="새폴더\SaveFile.cpp" />
-    <ClCompile Include="새폴더\SingleByteCharacter.cpp" />
-    <ClCompile Include="새폴더\Subject.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="새폴더\Array.h" />
-    <ClInclude Include="새폴더\Caret.h" />
-    <ClInclude Include="새폴더\CaretController.h" />
-    <ClInclude Include="새폴더\Character.h" />
-    <ClInclude Include="새폴더\CharacterMatrix.h" />
-    <ClInclude Include="새폴더\CharacterMatrixSingletonPattern.h" />
-    <ClInclude Include="새폴더\Composite.h" />
-    <ClInclude Include="새폴더\DoubleByteCharacter.h" />
-    <ClInclude Include="새폴더\Glyph.h" />
-    <ClInclude Include="새폴더\GlyphFactory.h" />
-    <ClInclude Include="새폴더\KeyAction.h" />
-    <ClInclude Include="새폴더\Line.h" />
-    <ClInclude Include="새폴더\LoadFile.h" />
-    <ClInclude Include="새폴더\NotePad.h" />
-    <ClInclude Include="새폴더\NotePadApp.h" />
-    <ClInclude Include="새폴더\Observer.h" />
-    <ClInclude Include="새폴더\Paper.h" />
-    <ClInclude Include="새폴더\Positioner.h" />
-    <ClInclude Include="새폴더\SaveFile.h" />
-    <ClInclude Include="새폴더\SingleByteCharacter.h" />
-    <ClInclude Include="새폴더\Subject.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -35,12 +35,12 @@ void CaretController::Update() {
 	
 	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
 	Positioner positioner;
-
+	
 	Long row = notePad->GetPaper()->GetCurrent();
 	Long column = notePad->GetLine()->GetCurrent();
 	Line* line = (Line*)notePad->GetLine();
 	Long x = positioner.GetX(notePad, line, column);
-	Long y = positioner.GetY(notePad, row);
+	Long y = positioner.GetY(notePad, row+1);
 	bool ret;
 	if (caret != 0) {
 		caret = 0;
@@ -61,7 +61,6 @@ CaretController& CaretController::operator=(const CaretController& source) {
 	this->caret = source.caret;
 	return *this;
 }
-
 CaretController::~CaretController() {
 	if (this->caret != 0) {
 		delete this->caret;
