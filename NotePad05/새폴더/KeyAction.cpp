@@ -334,7 +334,7 @@ CPoint KeyAction::BackspaceKey(UINT nChar) {
 		
 		this->row = rowPrev;
 		this->column = linePrev->GetCurrent();
-		if(this)
+		if (this);
 		paper->Remove(row);
 		paper->Next();
 	}
