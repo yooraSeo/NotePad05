@@ -316,13 +316,13 @@ CPoint KeyAction::BackspaceKey(UINT nChar) {
 	if (column > 0 && this->column <= line->GetLength()) {
 		line->Remove(this->column-1);
 	}
-	else if (column == 0 && paper->GetAt(paper->Prev())->GetCurrent() == 0) {
+	else if (column == 0 && paper->GetAt(paper->Prev())->GetLength() == 0) {
 		row = paper->GetCurrent();
 		paper->Remove(row);
 		paper->Next();
 	}
-	else if (column == 0 && paper->GetAt(paper->Prev())->GetCurrent() > 0) {
-		Long rowPrev = paper->GetCurrent();
+	else if (column == 0 && paper->GetAt(paper->Prev())->GetLength() > 0) {
+		Long rowPrev = paper->GetCurrent()-1;
 		Line* linePrev = (Line*)paper->GetAt(rowPrev);
 		Long i = 0;
 
@@ -331,9 +331,11 @@ CPoint KeyAction::BackspaceKey(UINT nChar) {
 			linePrev->Add(line->GetAt(i));
 			i++;
 		}
-		column = linePrev->GetCurrent()-1;
 		paper->Remove(row);
 		paper->Next();
+		this->row = rowPrev;
+		this->column = linePrev->GetCurrent();
+		//this->notePad->GetLine()->SetCurrent(this->column);
 	}
 	//this->notePad->GetLine()->SetCurrent(this->column-1);
 	this->notePad->SetLine(line);

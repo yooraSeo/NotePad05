@@ -112,19 +112,19 @@ int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 }
 
 void NotePad::OnPaint() {
-	Long lows;
+	Long row;
 	Long i = 0;
 	string text;
 	//Glyph* line;
 	Long height;
-	lows = this->paper->GetLength();
+	row = this->paper->GetLength();
 	CPaintDC dc(this);
 	this->GetFont();
 	CFont *pOldFont = dc.SelectObject(&this->font); //만든 폰트 적용	
 	//CFont font = this->GetFont;
 	Long num; //폭을 받을 실수
 	char cha[20];
-	while (i < lows) {
+	while (i < row) {
 		this->line = this->paper->GetAt(i);
 		text = this->line->MakeString();
 		height = this->characterMatrix->GetHeigh();
