@@ -33,10 +33,10 @@ MouseAction::~MouseAction() {
 
 CPoint MouseAction::Clicked(CPoint point) {
 	Paper* paper = (Paper*)this->notePad->GetPaper();
-	Long row = this->positioner->GetRow(notePad, (Glyph*)paper, (Long)point.y);
+	Long row = this->positioner->GetRow(notePad, (Glyph*)paper, point.y);
 	paper->SetCurrent(row);
 	Line* line = (Line*)this->notePad->GetPaper()->GetAt(row);
-	Long column = this->positioner->GetColumn(notePad, (Glyph*)line, (Long)point.x);
+	Long column = this->positioner->GetColumn(notePad, (Glyph*)line, point.x);
 	line->SetCurrent(column);
 
 	this->notePad->SetLine(line);
