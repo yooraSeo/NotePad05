@@ -26,6 +26,7 @@ public:
 	CPoint DownKey(UINT nChar);
 	CPoint Priorkey(UINT nChar);
 	CPoint NextKey(UINT nChar);
+	CPoint BackspaceKey(UINT nChar);
 private:
 	NotePad * notePad;
 	Positioner* positioner;

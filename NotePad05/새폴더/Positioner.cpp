@@ -43,8 +43,8 @@ Long Positioner::GetX(NotePad *notePad, Glyph* line, Long column) {
 	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
 	string str;
 	Long i = 0;
+	this->x = 0;
 	
-	(this->x) = 0;
 	while (i < column) {
 		if (dynamic_cast<SingleByteCharacter*>(line->GetAt(i))) {
 			str = line->GetAt(i)->MakeString();
@@ -69,7 +69,7 @@ Long Positioner::GetRow(NotePad *notePad,Glyph *paper ,Long y) {
 	if (y >= 0 && y < this->GetY(notePad, paper->GetLength())) {
 		this->row = y / charactermatrix->GetHeigh();
 	}
-	else {
+	else if (y <= paper->GetLength()) {
 		this->row = paper->GetLength();
 	}
 	return this->row;
@@ -82,7 +82,7 @@ Long Positioner::GetColumn(NotePad *notePad, Glyph* line, Long x) {
 	Long sumX = this->GetX(notePad, line, 0);
 	Long i = 1;
 	Long prevX = 0;
-	if (x<this->GetX(notePad,line,1)) {
+	if (x <= this->GetX(notePad, line, 1)) {
 		this->column = 0;
 	}
 	else if (x < lengX) {
@@ -91,14 +91,14 @@ Long Positioner::GetColumn(NotePad *notePad, Glyph* line, Long x) {
 			sumX = this->GetX(notePad, line, i);
 			i++;
 		}
-		if (prevX - x > sumX - x) {
-			this->column = i-1;
+		if (x - prevX > sumX - x) {
+			this->column = i - 1;
 		}
 		else {
-			this->column = i -2;
+			this->column = i - 2;
 		}
 	}
-	else if (x >= lengX || i >= leng) {
+	else if (x >= lengX) {
 		this->column = leng;
 	}
 	return this->column;

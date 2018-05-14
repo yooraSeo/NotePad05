@@ -123,7 +123,6 @@ void NotePad::OnPaint() {
 	CFont *pOldFont = dc.SelectObject(&this->font); //만든 폰트 적용	
 	//CFont font = this->GetFont;
 	Long num; //폭을 받을 실수
-	CString cstr; //화면에 출력한 문자열
 	char cha[20];
 	while (i < lows) {
 		this->line = this->paper->GetAt(i);
@@ -134,13 +133,14 @@ void NotePad::OnPaint() {
 		CSize display_size = dc.GetTextExtent(text.c_str()); //화면에 쓰여진 문자열의 길이 구하기
 		num = display_size.cx; //문자열을 실수로 받음
 		this->line = paper->GetAt(paper->GetCurrent());
-		cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,     조합 : %d",
-			paper->GetCurrent()+1,this->line->GetCurrent()+1,
-			this->GetCaretPos().x, this->GetCaretPos().y, this->isComposition);
-		dc.TextOut(600, 80, CString(cstr)); //출력
 
 		i++;
 	}
+	CString cstr; //화면에 출력한 문자열
+	cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,     조합 : %d",
+		paper->GetCurrent() + 1, this->line->GetCurrent() + 1,
+		this->GetCaretPos().x, this->GetCaretPos().y, this->isComposition);
+	dc.TextOut(600, 80, CString(cstr)); //출력
 	//GetConsoleCursorInfo()
 }
 
@@ -191,14 +191,19 @@ void NotePad::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	case VK_DOWN:
 		point = this->keyAction->DownKey(nChar);
 		break;
+	case VK_BACK:
+		point = this->keyAction->BackspaceKey(nChar);
+		break;
 	default: break;
 	}
+	Invalidate();
 }
 
 void NotePad::OnLButtonDown(UINT nFlags, CPoint point) {
 	if (nFlags == MK_LBUTTON) {
 		this->mouseAction->Clicked(point);
 	}
+	Invalidate();
 }
 
 void NotePad::OnLButtonUp(UINT nFlags, CPoint point) {
@@ -215,7 +220,7 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	characters[0] = (char)nChar;
 	characters[1] = 0;
 	Glyph* glyph = this->glyphFactory->FactoryCreator(characters);
-	if (nChar != VK_TAB && nChar != VK_RETURN && nChar != VK_ESCAPE) {
+	if (nChar != VK_TAB && nChar != VK_RETURN && nChar != VK_ESCAPE && nChar!=VK_BACK) {
 		this->line->Add(glyph);
 		this->line->Next();
 	}

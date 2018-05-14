@@ -38,7 +38,7 @@ CPoint KeyAction::HomeKey(UINT nChar) {
 
 	this->notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	return this->point;
 }
 
@@ -53,7 +53,7 @@ CPoint KeyAction::EndKey(UINT nChar) {
 
 	this->notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	return this->point;
 }
 CPoint KeyAction::LeftKey(UINT nChar) {
@@ -77,7 +77,7 @@ CPoint KeyAction::LeftKey(UINT nChar) {
 	notePad->SetLine(line);
 	notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	return this->point;
 }
 CPoint KeyAction::RightKey(UINT nChar) {
@@ -99,7 +99,7 @@ CPoint KeyAction::RightKey(UINT nChar) {
 	notePad->SetLine(line);
 	notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	return this->point;
 }
 CPoint KeyAction::UpKey(UINT nChar) {
@@ -174,7 +174,7 @@ CPoint KeyAction::UpKey(UINT nChar) {
 	notePad->SetLine(line);
 	notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	return this->point;
 }
 CPoint KeyAction::DownKey(UINT nChar) {
@@ -250,7 +250,7 @@ CPoint KeyAction::DownKey(UINT nChar) {
 	notePad->SetLine(line);
 	notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	return this->point;
 }
 CPoint KeyAction::Priorkey(UINT nChar) {
@@ -274,7 +274,7 @@ CPoint KeyAction::Priorkey(UINT nChar) {
 		notePad->SetLine(line);
 		notePad->Notify();
 		this->point = this->notePad->GetCaretPos();
-		notePad->Invalidate();
+		//notePad->Invalidate();
 		return this->point;
 	}
 
@@ -301,7 +301,44 @@ CPoint KeyAction::NextKey(UINT nChar) {
 		notePad->SetLine(line);
 		notePad->Notify();
 		this->point = this->notePad->GetCaretPos();
-		notePad->Invalidate();
+		//notePad->Invalidate();
 		return this->point;
 	}
+}
+
+CPoint KeyAction::BackspaceKey(UINT nChar) {
+	this->point = this->notePad->GetCaretPos();
+	Paper* paper = (Paper*)this->notePad->GetPaper();
+	this->row = paper->GetCurrent();
+	Line* line = (Line*)paper->GetAt(row);
+	//this->notePad->SetLine(line);
+	this->column = line->GetCurrent();
+	if (column > 0 && this->column <= line->GetLength()) {
+		line->Remove(this->column-1);
+	}
+	else if (column == 0 && paper->GetAt(paper->Prev())->GetCurrent() == 0) {
+		row = paper->GetCurrent();
+		paper->Remove(row);
+		paper->Next();
+	}
+	else if (column == 0 && paper->GetAt(paper->Prev())->GetCurrent() > 0) {
+		Long rowPrev = paper->GetCurrent();
+		Line* linePrev = (Line*)paper->GetAt(rowPrev);
+		Long i = 0;
+
+		this->column = linePrev->Last();
+		while (i < line->GetLength()) {
+			linePrev->Add(line->GetAt(i));
+			i++;
+		}
+		column = linePrev->GetCurrent()-1;
+		paper->Remove(row);
+		paper->Next();
+	}
+	//this->notePad->GetLine()->SetCurrent(this->column-1);
+	this->notePad->SetLine(line);
+	this -> notePad->SetPaper(paper);
+	this->notePad->Notify();
+	this->point = this->notePad->GetCaretPos();
+	return this->point;
 }
