@@ -38,6 +38,8 @@ void CaretController::Update() {
 	
 	Long row = notePad->GetPaper()->GetCurrent();
 	Long column = notePad->GetLine()->GetCurrent();
+
+
 	Line* line = (Line*)notePad->GetLine();
 	Long x = positioner.GetX(notePad, line, column);
 	Long y = positioner.GetY(notePad, row+1);

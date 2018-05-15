@@ -277,12 +277,17 @@ LRESULT NotePad::OnImeComposition(WPARAM wParam, LPARAM lParam) {
 	if (lParam & GCS_COMPSTR) {
 		nChar[0] = HIBYTE(LOWORD(wParam));
 		nChar[1] = LOBYTE(LOWORD(wParam));
+
 		if (this->line->GetLength() > 0 && this->isComposition == TRUE) {
 			this->line->Remove(this->line->GetCurrent());
 		}		
 		glyph = this->glyphFactory->FactoryCreator(nChar);
 		this->line->Add(glyph);
+
 		this->isComposition = TRUE;
+		if (this->line->GetAt(this->line->GetCurrent())==0) {
+			this->isComposition = FALSE;
+		}
 		this->Invalidate();
 	}
 	

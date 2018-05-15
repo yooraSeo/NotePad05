@@ -313,33 +313,31 @@ CPoint KeyAction::BackspaceKey(UINT nChar) {
 	Line* line = (Line*)paper->GetAt(row);
 	//this->notePad->SetLine(line);
 	this->column = line->GetCurrent();
-	if (column > 0 && this->column <= line->GetLength()) {
-		line->Remove(this->column-1);
-	}
-	else if (column == 0 && paper->GetAt(paper->Prev())->GetLength() == 0) {
-		row = paper->GetCurrent();
+	if (this->column > 0 && this->column <= line->GetLength()) {
+		line->Remove(this->column - 1);
+		this->notePad->SetLine(line);
+    }
+	else if (this->column == 0 && this->row >0 && paper->GetAt(paper->GetCurrent()-1)->GetLength() == 0) {
+		row = paper->Prev();
 		paper->Remove(row);
 		paper->Next();
+		this->notePad->SetLine(line);
 	}
-	else if (column == 0 && paper->GetAt(paper->Prev())->GetLength() > 0) {
-		Long rowPrev = paper->GetCurrent();
+	else if (column == 0 && this->row >0 && paper->GetAt(paper->GetCurrent() - 1)->GetLength() > 0) {
+		Long rowPrev = paper->Prev(); 
 		Line* linePrev = (Line*)paper->GetAt(rowPrev);
-		Long i = 0;
-
-		this->column = linePrev->Last();
-		while (i < line->GetLength()) {
-			linePrev->Add(line->GetAt(i));
-			i++;
-		}
-		
-		this->row = rowPrev;
-		this->column = linePrev->GetCurrent();
-		if (this);
-		paper->Remove(row);
-		paper->Next();
+		linePrev->Last();
+		this->notePad->SetLine(linePrev);
+		//Long i = 0;
+		//while (i < line->GetLength()) {
+		//	linePrev->Add(line->GetAt(i));
+		//	//this->notePad->GetLine()->Add(line->GetAt(i));
+		//	i++;
+		//}
+		paper->Remove(this->row);
+		this->row = paper->GetCurrent();
+		this->column = paper->GetAt(this->row)->GetCurrent()-1;
 	}
-	//this->notePad->GetLine()->SetCurrent(this->column-1);
-	this->notePad->SetLine(line);
 	this->notePad->SetPaper(paper);
 	this->notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
