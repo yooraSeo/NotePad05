@@ -29,7 +29,6 @@ CharacterMatrix::CharacterMatrix(NotePad* notePad) {
 	/*CFont *pCurFont = notePad->GetFont();
 	pDc->SelectObject(pCurFont);*/
 	while (i <= 127) {
-		
 		str =(TCHAR)i;
 		this->widths[i] = (pDc->GetTextExtent(str).cx);
 		i++;

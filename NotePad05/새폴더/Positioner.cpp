@@ -12,6 +12,7 @@
 #include "DoubleByteCharacter.h"
 #include "Glyph.h"
 #include "Line.h"
+#include "NotePad.h"
 #include "CharacterMatrixSingletonPattern.h"
 
 Positioner::Positioner() {
@@ -43,8 +44,8 @@ Long Positioner::GetX(NotePad *notePad, Glyph* line, Long column) {
 	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
 	string str;
 	Long i = 0;
-	this->x = 0;
 	
+	(this->x) = 0;
 	while (i < column) {
 		if (dynamic_cast<SingleByteCharacter*>(line->GetAt(i))) {
 			str = line->GetAt(i)->MakeString();
@@ -60,65 +61,49 @@ Long Positioner::GetX(NotePad *notePad, Glyph* line, Long column) {
 
 Long Positioner::GetY(NotePad *notePad, Long row) {
 	CharacterMatrix* charactermatrix = CharacterMatrixSingletonPattern::Instance(notePad);
-	this->y = (charactermatrix->GetHeigh())*(row-1);
+	this->y = (charactermatrix->GetHeigh())*row;
 	return this->y;
 }
 
-Long Positioner::GetRow(NotePad *notePad,Glyph *paper ,Long y) {
-	CharacterMatrix* charactermatrix = CharacterMatrixSingletonPattern::Instance(notePad);
-	if (y >= 0 && y < this->GetY(notePad, paper->GetLength())) {
-		this->row = y / charactermatrix->GetHeigh();
-	}
-	else if (y <= paper->GetLength()) {
-		this->row = paper->GetLength();
+Long Positioner::GetRow(NotePad* notePad, Long y) {
+	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
+	Long height = characterMatrix->GetHeigh();
+	this->row = y / height;
+	if (this->row >= notePad->GetPaper()->GetLength()) {
+		this->row = notePad->GetPaper()->GetLength() - 1;
 	}
 	return this->row;
 }
 
-Long Positioner::GetColumn(NotePad *notePad, Glyph* line, Long x) {
+Long Positioner::GetColumn(NotePad* notePad, Glyph* line, Long x) {
 	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
-	Long lengX = this->GetX(notePad, line, line->GetLength());
 	Long leng = line->GetLength();
-	Long sumX = this->GetX(notePad, line, 0);
-	Long i = 1;
-	Long prevX = 0;
-	if (x <= this->GetX(notePad, line, 1)) {
-		this->column = 0;
-	}
-	else if (x < lengX) {
-		while (i < leng && sumX < x) {
-			prevX = sumX;
-			sumX = this->GetX(notePad, line, i);
+	Long lineX = this->GetX(notePad, line, leng);
+	Long temp = 0;
+	Long frontSum;
+	Long rearSum;
+	Long i = 0;
+	if (x < lineX) {
+		while (i <= leng && temp < x) {
+			temp = this->GetX(notePad, line, i);
 			i++;
 		}
-		if (x - prevX > sumX - x) {
-			this->column = i - 1;
+		if (i > 1) {
+			frontSum = this->GetX(notePad, line, i - 2);
+			rearSum = this->GetX(notePad, line, i - 1);
+			if (x - frontSum <= rearSum - x) {
+				this->column = i - 2;
+			}
+			else {
+				this->column = i - 1;
+			}
 		}
 		else {
-			this->column = i - 2;
+			this->column = i;
 		}
 	}
-	else if (x >= lengX) {
+	else {
 		this->column = leng;
 	}
 	return this->column;
 }
-
-
-//	Long i = 0;
-//	Long xOne = 0;
-//	Long y = this->GetX(notePad, line, line->GetLength());
-//	if (x >=0 && x < y) {
-//		while (xOne < x && i <= line->GetLength()) {
-//			xOne = this->GetX(notePad, line, i);
-//			i++;
-//		}
-//		if(this->)
-//		this->column = i - 2;
-//		
-//	}
-//	else {
-//		this->column = line->GetLength();
-//	}
-//	return this->column;
-//}

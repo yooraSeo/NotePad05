@@ -10,7 +10,6 @@
 
 #ifndef _POSITIONER_H
 #define _POSIIONER_H
-
 typedef signed long int Long;
 class NotePad;
 class Glyph;
@@ -22,8 +21,8 @@ public:
 	~Positioner();
 	Long GetX(NotePad *notePad, Glyph* line, Long column);
 	Long GetY(NotePad *notePad, Long row);
-	Long GetRow(NotePad* notePad,Glyph* paper, Long y);
-	Long GetColumn(NotePad *notePad, Glyph *line, Long x);
+	Long GetRow(NotePad* notePad, Long x);
+	Long GetColumn(NotePad* notePad, Glyph* line, Long y);
 	Positioner& operator=(const Positioner& source);
 	Long GetX() const;
 	Long GetY() const;

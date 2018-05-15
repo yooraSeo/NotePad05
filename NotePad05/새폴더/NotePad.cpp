@@ -15,28 +15,29 @@
 #include "CharacterMatrix.h"
 #include "CaretController.h"
 #include "CharacterMatrixSingletonPattern.h"
-#include <string>
-#include <string.h>
 #include "GlyphFactory.h"
 #include "SaveFile.h"
 #include "LoadFile.h"
 #include "KeyAction.h"
 #include "MouseAction.h"
 
+#include <string>
+#include <string.h>
 using namespace std;
 BEGIN_MESSAGE_MAP(NotePad, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_PAINT()
 	ON_WM_CHAR()
 	ON_WM_KEYDOWN()
-	ON_WM_LBUTTONDOWN()
-	ON_WM_LBUTTONUP()
-	ON_WM_LBUTTONDBLCLK()
 	ON_MESSAGE(WM_IME_CHAR, OnImeChar)
 	ON_MESSAGE(WM_IME_COMPOSITION, OnImeComposition)
 	ON_MESSAGE(WM_IME_STARTCOMPOSITION, OnImeStartComposition)
 	ON_WM_SETFOCUS()
 	ON_WM_KILLFOCUS()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
+	ON_WM_LBUTTONDBLCLK()
+	ON_WM_MOUSEMOVE()
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
@@ -51,10 +52,12 @@ NotePad::NotePad() {
 	this->paper = NULL;
 	this->line = NULL;
 	this->caretController = NULL;
-	this->isComposition = FALSE;
 	this->glyphFactory = NULL;
 	this->keyAction = NULL;
 	this->mouseAction = NULL;
+	this->isComposition = FALSE;
+	this->isDragging = FALSE;
+	this->cursorPoint = NULL;
 }
 
 int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
@@ -70,7 +73,6 @@ int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	this->Notify();
 	this->keyAction = new KeyAction(this);
 	this->mouseAction = new MouseAction(this);
-
 
 #if 0
 	position = line->Add(new SingleByteCharacter('1'));
@@ -112,19 +114,20 @@ int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 }
 
 void NotePad::OnPaint() {
-	Long row;
+	Long lows;
 	Long i = 0;
 	string text;
 	//Glyph* line;
 	Long height;
-	row = this->paper->GetLength();
+	lows = this->paper->GetLength();
 	CPaintDC dc(this);
 	this->GetFont();
 	CFont *pOldFont = dc.SelectObject(&this->font); //만든 폰트 적용	
 	//CFont font = this->GetFont;
 	Long num; //폭을 받을 실수
+	CString cstr; //화면에 출력한 문자열
 	char cha[20];
-	while (i < row) {
+	while (i < lows) {
 		this->line = this->paper->GetAt(i);
 		text = this->line->MakeString();
 		height = this->characterMatrix->GetHeigh();
@@ -133,14 +136,13 @@ void NotePad::OnPaint() {
 		CSize display_size = dc.GetTextExtent(text.c_str()); //화면에 쓰여진 문자열의 길이 구하기
 		num = display_size.cx; //문자열을 실수로 받음
 		this->line = paper->GetAt(paper->GetCurrent());
+			cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,     조합 : %d",
+			paper->GetCurrent()+1,this->line->GetCurrent()+1,
+			this->GetCaretPos().x, this->GetCaretPos().y, this->isDragging);
+		dc.TextOut(600, 80, CString(cstr)); //출력
 
 		i++;
 	}
-	CString cstr; //화면에 출력한 문자열
-	cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,     조합 : %d",
-		paper->GetCurrent() + 1, this->line->GetCurrent() + 1,
-		this->GetCaretPos().x, this->GetCaretPos().y, this->isComposition);
-	dc.TextOut(600, 80, CString(cstr)); //출력
 	//GetConsoleCursorInfo()
 }
 
@@ -191,27 +193,12 @@ void NotePad::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	case VK_DOWN:
 		point = this->keyAction->DownKey(nChar);
 		break;
-	case VK_BACK:
-		point = this->keyAction->BackspaceKey(nChar);
+	case VK_DELETE:
+		point = this->keyAction->DeleteKey(nChar);
 		break;
-	default: break;
+	default:
+		break;
 	}
-	Invalidate();
-}
-
-void NotePad::OnLButtonDown(UINT nFlags, CPoint point) {
-	if (nFlags == MK_LBUTTON) {
-		this->mouseAction->Clicked(point);
-	}
-	Invalidate();
-}
-
-void NotePad::OnLButtonUp(UINT nFlags, CPoint point) {
-
-}
-
-void NotePad::OnLButtonDblClk(UINT nFlags, CPoint point) {
-
 }
 
 void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
@@ -220,13 +207,17 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 	characters[0] = (char)nChar;
 	characters[1] = 0;
 	Glyph* glyph = this->glyphFactory->FactoryCreator(characters);
-	if (nChar != VK_TAB && nChar != VK_RETURN && nChar != VK_ESCAPE && nChar!=VK_BACK) {
-		this->line->Add(glyph);
-		this->line->Next();
+	if (nChar != VK_TAB && nChar != VK_RETURN && nChar != VK_ESCAPE && nChar != VK_BACK && nChar != VK_DELETE) {
+		if (this->line->GetCurrent() >= this->line->GetLength()) {
+			this->line->Add(glyph);
+			this->line->Next();
+		}
 	}
 	else if (nChar == VK_RETURN) {
-		index = this->paper->Add(glyph);
-		this->line = this->paper->GetAt(index);
+		if (this->line->GetCurrent() >= this->line->GetLength() && this->paper->GetCurrent() >= this->paper->GetLength()-1) {
+			index = this->paper->Add(glyph);
+			this->line = this->paper->GetAt(index);
+		}
 	}
 	else if (nChar == VK_TAB) {
 		Long i = 0;
@@ -235,6 +226,10 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 			i++;
 		}
 	}
+	else if (nChar == VK_BACK) {
+		this->keyAction->BackSpaceKey(nChar);
+	}
+
 	else if (nChar == VK_ESCAPE) {
 		this->isComposition = FALSE;
 	}
@@ -262,7 +257,7 @@ LRESULT NotePad::OnImeChar(WPARAM wParam, LPARAM lParam) {
 	this->line->Remove(this->line->GetCurrent());
 	this->line->Add(glyph);//(new DoubleByteCharacter(nChar));
 	this->line->Next();
-	isComposition = FALSE;
+	this->isComposition = FALSE;
 	this->Invalidate();
 	this->Notify();
 
@@ -277,15 +272,16 @@ LRESULT NotePad::OnImeComposition(WPARAM wParam, LPARAM lParam) {
 	if (lParam & GCS_COMPSTR) {
 		nChar[0] = HIBYTE(LOWORD(wParam));
 		nChar[1] = LOBYTE(LOWORD(wParam));
-
 		if (this->line->GetLength() > 0 && this->isComposition == TRUE) {
 			this->line->Remove(this->line->GetCurrent());
-		}		
-		glyph = this->glyphFactory->FactoryCreator(nChar);
-		this->line->Add(glyph);
-
-		this->isComposition = TRUE;
-		if (this->line->GetAt(this->line->GetCurrent())==0) {
+		}
+		if (nChar[0] != '\0') {
+			glyph = this->glyphFactory->FactoryCreator(nChar);
+			this->line->Add(glyph);
+			this->isComposition = TRUE;
+		}
+		else {
+			this->line->Next();
 			this->isComposition = FALSE;
 		}
 		this->Invalidate();
@@ -315,3 +311,31 @@ void NotePad::OnKillFocus(CWnd* pNewWnd) {
 	}
 }
 
+void NotePad::OnLButtonDown(UINT nFlags, CPoint point) {
+	CPoint ret;
+	
+	switch (nFlags)
+	{
+	case MK_LBUTTON:
+		ret = this->mouseAction->Clicked(nFlags, point);
+		this->isDragging = TRUE;
+		SetCapture();
+		this->Invalidate();
+		break;
+	default:
+		break;
+	}
+	
+}
+void NotePad::OnLButtonUp(UINT nFlags, CPoint point) {
+	this->isDragging = FALSE;
+	ReleaseCapture();
+	this->Invalidate();
+}
+void NotePad::OnLButtonDulClk(UINT nFlags, CPoint point) {
+
+}
+void NotePad::OnMouseMove(UINT nFlags, CPoint point) {
+	//CRect corner(0, 0, 10, 10);
+	
+}

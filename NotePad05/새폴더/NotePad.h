@@ -23,7 +23,6 @@ class CaretController;
 class GlyphFactory;
 class KeyAction;
 class MouseAction;
-
 class NotePad :public CFrameWnd, public Subject {
 public:
 	NotePad();
@@ -42,30 +41,33 @@ private:
 	Glyph* glyph;
 	UINT nChar;
 	CFont font; //폰트 선언
+	CPoint cursorPoint;
 	CharacterMatrix* characterMatrix;
 	CaretController* caretController;
 	GlyphFactory* glyphFactory;
 	KeyAction* keyAction;
-	MouseAction *mouseAction;
+	MouseAction* mouseAction;
 
 protected:	
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnPaint();	
 	afx_msg void OnChar(UINT nChar,UINT nRepCnt,UINT nFlags);
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg LRESULT OnImeChar(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnImeComposition(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnImeStartComposition(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnSetFocus(CWnd *pOldWnd);
 	afx_msg void OnKillFocus(CWnd *NewWnd);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDulClk(UINT nFlags, CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnClose();
 	DECLARE_MESSAGE_MAP()
 
 private:
 	BOOL isComposition = FALSE;
+	BOOL isDragging = FALSE;
 };
 inline BOOL NotePad::GetIsComposition() const {
 	return this->isComposition;

@@ -1,21 +1,20 @@
-//MouseAction.h
+
+
 #ifndef _MOUSEACTION_H
 #define _MOUSEACTION_H
 #include <afxwin.h>
-
 typedef signed long int Long;
 class NotePad;
 class Positioner;
 class Glyph;
-
 class MouseAction {
 public:
 	MouseAction();
 	MouseAction(NotePad* notePad);
-	~MouseAction();
-	CPoint Clicked(CPoint point);
+	CPoint Clicked(UINT nFlags, CPoint point);
 	CPoint DoubleClicked();
-	CPoint Drag(CPoint point);//범위를 지정하다가 완료되어야!
+	CPoint Drag(UINT nFlags, CPoint point);
+	~MouseAction();
 private:
 	NotePad * notePad;
 	Positioner* positioner;
