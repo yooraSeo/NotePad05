@@ -34,7 +34,7 @@ CPoint KeyAction::HomeKey(UINT nChar) {
 	notePad->SetLine(line);
 
 	this->notePad->Notify();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	this->point = this->notePad->GetCaretPos();
 	return this->point;
 }
@@ -44,7 +44,7 @@ CPoint KeyAction::EndKey(UINT nChar) {
 	notePad->SetLine(line);
 
 	this->notePad->Notify();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	this->point = this->notePad->GetCaretPos();
 	return this->point;
 }
@@ -67,7 +67,7 @@ CPoint KeyAction::LeftKey(UINT nChar) {
 	}
 	notePad->SetLine(line);
 	notePad->Notify();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	this->point = this->notePad->GetCaretPos();
 	return this->point;
 }
@@ -88,7 +88,7 @@ CPoint KeyAction::RightKey(UINT nChar) {
 	}
 	notePad->SetLine(line);
 	notePad->Notify();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	this->point = this->notePad->GetCaretPos();
 	return this->point;
 }
@@ -162,7 +162,7 @@ CPoint KeyAction::UpKey(UINT nChar) {
 	notePad->SetPaper(paper);
 	notePad->SetLine(line);
 	notePad->Notify();
-	notePad->Invalidate();
+	//notePad->Invalidate();
 	this->point = this->notePad->GetCaretPos();
 	return this->point;
 }
@@ -238,7 +238,7 @@ CPoint KeyAction::DownKey(UINT nChar) {
 	notePad->SetLine(line);
 	notePad->Notify();
 
-	notePad->Invalidate();
+	//notePad->Invalidate();
 
 	this->point = this->notePad->GetCaretPos();
 	return this->point;
@@ -262,7 +262,7 @@ CPoint KeyAction::Priorkey(UINT nChar) {
 		notePad->SetPaper(paper);
 		notePad->SetLine(line);
 		notePad->Notify();
-		notePad->Invalidate();
+		//notePad->Invalidate();
 		this->point = this->notePad->GetCaretPos();
 	}
 	return this->point;
@@ -289,7 +289,7 @@ CPoint KeyAction::NextKey(UINT nChar) {
 		notePad->SetPaper(paper);
 		notePad->SetLine(line);
 		notePad->Notify();
-		notePad->Invalidate();
+		//notePad->Invalidate();
 		this->point = this->notePad->GetCaretPos();
 	}
 	return this->point;
@@ -342,7 +342,7 @@ CPoint KeyAction::BackSpaceKey(UINT nChar) {
 		this->notePad->SetPaper(paper);
 	}
 
-	notePad->Invalidate();
+	//this->notePad->Invalidate();
 	this->notePad->SetLine(line);
 	this->notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
@@ -388,9 +388,32 @@ CPoint KeyAction::DeleteKey(UINT nChar) {
 	this->notePad->SetLine(line);
 	this->notePad->Notify();
 	this->point = this->notePad->GetCaretPos();
-	notePad->Invalidate();
+	//this->notePad->Invalidate();
 	return this->point;
 }
+
+//CPoint KeyAction::DotKey(UINT nChar) {
+//
+//	Paper* paper = (Paper*)this->notePad->GetPaper();
+//	this->row = paper->GetCurrent();
+//	Line* line = (Line*)this->notePad->GetLine();
+//	this->column = line->GetCurrent();
+//	char character = 46;
+//	
+//	Glyph *glyph = new SingleByteCharacter(character);
+//	Long index;
+//	
+//	index = line->Add(glyph);
+//	line->Next();
+//
+//	this->column = line->GetCurrent();
+//
+//	this->notePad->Notify();
+//	this->point = this->notePad->GetCaretPos();
+//	this->notePad->Invalidate();
+//	return this->point;
+//}
+
 #if 0
 void KeyAction::Action(UINT nChar){
 	CPoint point = this->notePad->GetCaretPos();

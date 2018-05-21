@@ -13,7 +13,7 @@ public:
 	MouseAction(NotePad* notePad);
 	CPoint Clicked(UINT nFlags, CPoint point);
 	CPoint DoubleClicked();
-	CPoint Drag(UINT nFlags, CPoint point);
+	//CPoint Drag(UINT nFlags, CPoint point);
 	~MouseAction();
 private:
 	NotePad * notePad;

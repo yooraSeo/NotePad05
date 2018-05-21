@@ -26,7 +26,7 @@ Glyph* GlyphFactory::FactoryCreator(char(*characters)) {
 	else if (characters[0] == '\r' || characters[0] == '\n') {
 		glyph = new Line;
 	}
-	else if (characters[0] > 0 && characters[0] < 128) {
+	else if (characters[0] > 31 && characters[0] < 128) {
 		glyph = new SingleByteCharacter(characters[0]);
 	}
 	else if (characters[0] & 0x80) {//한글을 읽을 때 한글에 대한 유니코드 수가 필요한데 더 생각해봐야 함.

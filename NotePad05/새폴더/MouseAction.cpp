@@ -51,8 +51,8 @@ CPoint MouseAction::DoubleClicked() {
 	return this->point;
 }
 
-CPoint MouseAction::Drag(UINT nFlags, CPoint point) {
-
-	return this->point;
-}
+//CPoint MouseAction::Drag(UINT nFlags, CPoint point) {
+//
+//	return this->point;
+//}
 

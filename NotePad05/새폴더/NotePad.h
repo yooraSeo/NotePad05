@@ -23,6 +23,7 @@ class CaretController;
 class GlyphFactory;
 class KeyAction;
 class MouseAction;
+class Positioner;
 class NotePad :public CFrameWnd, public Subject {
 public:
 	NotePad();
@@ -47,6 +48,7 @@ private:
 	GlyphFactory* glyphFactory;
 	KeyAction* keyAction;
 	MouseAction* mouseAction;
+	Positioner* positioner;
 
 protected:	
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
