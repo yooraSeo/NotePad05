@@ -19,52 +19,78 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="새폴더\ActionCreator.cpp" />
     <ClCompile Include="새폴더\Array.cpp" />
+    <ClCompile Include="새폴더\BackSpaceKey.cpp" />
     <ClCompile Include="새폴더\Caret.cpp" />
     <ClCompile Include="새폴더\CaretController.cpp" />
     <ClCompile Include="새폴더\Character.cpp" />
     <ClCompile Include="새폴더\CharacterMatrix.cpp" />
     <ClCompile Include="새폴더\CharacterMatrixSingletonPattern.cpp" />
     <ClCompile Include="새폴더\Composite.cpp" />
+    <ClCompile Include="새폴더\DeleteKey.cpp" />
     <ClCompile Include="새폴더\DoubleByteCharacter.cpp" />
+    <ClCompile Include="새폴더\DownKey.cpp" />
+    <ClCompile Include="새폴더\EndKey.cpp" />
+    <ClCompile Include="새폴더\EscKey.cpp" />
     <ClCompile Include="새폴더\Glyph.cpp" />
     <ClCompile Include="새폴더\GlyphFactory.cpp" />
+    <ClCompile Include="새폴더\HomeKey.cpp" />
     <ClCompile Include="새폴더\KeyAction.cpp" />
+    <ClCompile Include="새폴더\LeftKey.cpp" />
     <ClCompile Include="새폴더\Line.cpp" />
     <ClCompile Include="새폴더\LoadFile.cpp" />
     <ClCompile Include="새폴더\MouseAction.cpp" />
+    <ClCompile Include="새폴더\NextKey.cpp" />
     <ClCompile Include="새폴더\NotePad.cpp" />
     <ClCompile Include="새폴더\NotePadApp.cpp" />
     <ClCompile Include="새폴더\Observer.cpp" />
     <ClCompile Include="새폴더\Paper.cpp" />
     <ClCompile Include="새폴더\Positioner.cpp" />
+    <ClCompile Include="새폴더\PriorKey.cpp" />
+    <ClCompile Include="새폴더\Range.cpp" />
+    <ClCompile Include="새폴더\RightKey.cpp" />
     <ClCompile Include="새폴더\SaveFile.cpp" />
     <ClCompile Include="새폴더\SingleByteCharacter.cpp" />
     <ClCompile Include="새폴더\Subject.cpp" />
+    <ClCompile Include="새폴더\UpKey.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="새폴더\ActionCreator.h" />
     <ClInclude Include="새폴더\Array.h" />
+    <ClInclude Include="새폴더\BackSpaceKey.h" />
     <ClInclude Include="새폴더\Caret.h" />
     <ClInclude Include="새폴더\CaretController.h" />
     <ClInclude Include="새폴더\Character.h" />
     <ClInclude Include="새폴더\CharacterMatrix.h" />
     <ClInclude Include="새폴더\CharacterMatrixSingletonPattern.h" />
     <ClInclude Include="새폴더\Composite.h" />
+    <ClInclude Include="새폴더\DeleteKey.h" />
     <ClInclude Include="새폴더\DoubleByteCharacter.h" />
+    <ClInclude Include="새폴더\DownKey.h" />
+    <ClInclude Include="새폴더\EndKey.h" />
+    <ClInclude Include="새폴더\EscKey.h" />
     <ClInclude Include="새폴더\Glyph.h" />
     <ClInclude Include="새폴더\GlyphFactory.h" />
+    <ClInclude Include="새폴더\HomeKey.h" />
     <ClInclude Include="새폴더\KeyAction.h" />
+    <ClInclude Include="새폴더\LeftKey.h" />
     <ClInclude Include="새폴더\Line.h" />
     <ClInclude Include="새폴더\LoadFile.h" />
     <ClInclude Include="새폴더\MouseAction.h" />
+    <ClInclude Include="새폴더\NextKey.h" />
     <ClInclude Include="새폴더\NotePad.h" />
     <ClInclude Include="새폴더\NotePadApp.h" />
     <ClInclude Include="새폴더\Observer.h" />
     <ClInclude Include="새폴더\Paper.h" />
     <ClInclude Include="새폴더\Positioner.h" />
+    <ClInclude Include="새폴더\PriorKey.h" />
+    <ClInclude Include="새폴더\Range.h" />
+    <ClInclude Include="새폴더\RightKey.h" />
     <ClInclude Include="새폴더\SaveFile.h" />
     <ClInclude Include="새폴더\SingleByteCharacter.h" />
     <ClInclude Include="새폴더\Subject.h" />
+    <ClInclude Include="새폴더\UpKey.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

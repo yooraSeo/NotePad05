@@ -24,6 +24,7 @@ class GlyphFactory;
 class KeyAction;
 class MouseAction;
 class Positioner;
+class Range;
 class NotePad :public CFrameWnd, public Subject {
 public:
 	NotePad();
@@ -34,7 +35,8 @@ public:
 	UINT GetNChar() const;
 	Glyph* SetPaper(Glyph* paper);
 	Glyph* SetLine(Glyph* line);
-	
+	BOOL SetIsComposition(BOOL ret);
+	//CPoint GetCursorPoint() const;
 private:
 	string name;
 	Glyph* paper;
@@ -46,9 +48,9 @@ private:
 	CharacterMatrix* characterMatrix;
 	CaretController* caretController;
 	GlyphFactory* glyphFactory;
-	KeyAction* keyAction;
 	MouseAction* mouseAction;
 	Positioner* positioner;
+	Range* range;
 
 protected:	
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -93,6 +95,10 @@ inline Glyph* NotePad::SetLine(Glyph* line){
 inline Glyph* NotePad::SetPaper(Glyph* paper) {
 	this->paper = paper;
 	return this->paper;
+}
+inline BOOL NotePad::SetIsComposition(BOOL ret) {
+	this->isComposition = ret;
+	return this->isComposition;
 }
 #endif//_NOTEPAD_H
 

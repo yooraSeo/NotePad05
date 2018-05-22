@@ -8,6 +8,9 @@
     <Filter Include="소스 파일">
       <UniqueIdentifier>{4f646be3-1515-4ed0-ae27-56754e633bdd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="KeyAction">
+      <UniqueIdentifier>{52f22eb8-30d3-45f5-8ee2-774030cd3fb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="새폴더\Array.cpp">
@@ -38,9 +41,6 @@
       <Filter>리소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="새폴더\GlyphFactory.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\KeyAction.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="새폴더\Line.cpp">
@@ -76,6 +76,48 @@
     <ClCompile Include="새폴더\Subject.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="새폴더\Range.cpp">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\DownKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\EndKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\HomeKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\KeyAction.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\LeftKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\RightKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\UpKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\ActionCreator.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\PriorKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\NextKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\BackSpaceKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\DeleteKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
+    <ClCompile Include="새폴더\EscKey.cpp">
+      <Filter>KeyAction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="새폴더\Array.h">
@@ -106,9 +148,6 @@
       <Filter>리소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="새폴더\GlyphFactory.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\KeyAction.h">
       <Filter>리소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="새폴더\Line.h">
@@ -143,6 +182,48 @@
     </ClInclude>
     <ClInclude Include="새폴더\Subject.h">
       <Filter>리소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\Range.h">
+      <Filter>리소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\DownKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\EndKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\HomeKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\KeyAction.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\LeftKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\RightKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\UpKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\ActionCreator.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\PriorKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\NextKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\BackSpaceKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\DeleteKey.h">
+      <Filter>KeyAction</Filter>
+    </ClInclude>
+    <ClInclude Include="새폴더\EscKey.h">
+      <Filter>KeyAction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

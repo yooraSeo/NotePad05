@@ -297,17 +297,17 @@ void Array<T>::LinearSearchDuplicate(void* key, Long *(*indexes), Long *count, i
 	}
 	if (*count > 0) {
 		*indexes = new Long[*count];
+		i = 0;
+		while (j < *count && i < this->length) {
+			if (compare(this->front + i, key) == 0) {
+				(*indexes)[j] = i;
+				j++;
+			}
+			i++;
+		}
 	}
 	else {
 		*indexes = 0;
-	}
-	i = 0;
-	while (j < *count && i < this->length) {
-		if (compare(this->front + i, key) == 0) {
-			(*indexes)[j] = i;
-			j++;
-		}
-		i++;
 	}
 }
 

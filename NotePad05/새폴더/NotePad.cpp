@@ -21,6 +21,9 @@
 #include "KeyAction.h"
 #include "MouseAction.h"
 #include "Positioner.h"
+#include "Range.h"
+#include "ActionCreator.h"
+
 
 #include <string>
 #include <string.h>
@@ -54,12 +57,12 @@ NotePad::NotePad() {
 	this->line = NULL;
 	this->caretController = NULL;
 	this->glyphFactory = NULL;
-	this->keyAction = NULL;
 	this->mouseAction = NULL;
 	this->isComposition = FALSE;
 	this->isDragging = FALSE;
 	this->cursorPoint = NULL;
 	this->positioner = NULL;
+	this->range = NULL;
 }
 
 int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
@@ -73,10 +76,9 @@ int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 		this->line->Next(); // 로딩시 커런트의 입력 대기 위치 잡기
 	}
 	this->Notify();
-	this->keyAction = new KeyAction(this);
 	this->mouseAction = new MouseAction(this);
 	this->positioner = new Positioner();
-
+	this->range = new Range;
 #if 0
 	position = line->Add(new SingleByteCharacter('1'));
 	position = line->Add(new SingleByteCharacter('2'));
@@ -169,39 +171,10 @@ void NotePad::OnClose() {
 }
 
 void NotePad::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
-	CPoint point;
-	
-	switch (nChar)
-	{
-	case VK_PRIOR:
-		point = this->keyAction->Priorkey(nChar);
-		break;
-	case VK_NEXT:
-		point = this->keyAction->NextKey(nChar);
-		break;
-	case VK_HOME:
-		point = this->keyAction->HomeKey(nChar);
-		break;
-	case VK_END:
-		point = this->keyAction->EndKey(nChar);
-		break;
-	case VK_LEFT:
-		point = this->keyAction->LeftKey(nChar);
-		break;
-	case VK_RIGHT:
-		point = this->keyAction->RightKey(nChar);
-		break;
-	case VK_UP:
-		point = this->keyAction->UpKey(nChar);
-		break;
-	case VK_DOWN:
-		point = this->keyAction->DownKey(nChar);
-		break;
-	case VK_DELETE:
-		point = this->keyAction->DeleteKey(nChar);
-		break;
-	default:
-		break;
+	if (nChar == VK_HOME || nChar == VK_END || nChar == VK_LEFT || nChar ==VK_RIGHT || nChar ==VK_UP || nChar ==VK_DOWN || nChar== VK_PRIOR || nChar == VK_NEXT || nChar ==VK_BACK || nChar ==VK_DELETE || nChar==VK_ESCAPE) {
+		ActionCreator actionCreator;
+		KeyAction* keyAction = actionCreator.Create(this, nChar);
+		keyAction->Action();
 	}
 	this->Invalidate();
 }
@@ -232,13 +205,11 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 			i++;
 		}
 	}
-	else if (nChar == VK_BACK) {
-		this->keyAction->BackSpaceKey(nChar);
-	}
 
-	else if (nChar == VK_ESCAPE) {
-		this->isComposition = FALSE;
-	}
+	//else if (nChar == VK_ESCAPE) {
+	//	this->isComposition = FALSE;
+	//}
+
 	if (this->isComposition != FALSE) {
 		this->isComposition = FALSE;
 	}
@@ -414,6 +385,7 @@ void NotePad::OnLButtonDown(UINT nFlags, CPoint point) {
 	
 }
 void NotePad::OnLButtonUp(UINT nFlags, CPoint point) {
+	//this->range->MouseDrow(this, &point);
 	this->isDragging = FALSE;
 	ReleaseCapture();
 	this->Invalidate();
@@ -426,29 +398,29 @@ void NotePad::OnMouseMove(UINT nFlags, CPoint point) {
 	this->line->SetCurrent(point.x);
 
 	if (this->isDragging == TRUE) {
-
-		if (this->line->GetLength() != 0 && point.x < this->cursorPoint.x && point.y <= this->cursorPoint.y) {
-			CClientDC dc(this);
-			CPen pen;
-			pen.CreatePen(PS_INSIDEFRAME, 0, RGB(54, 138, 255));
-			CPen* oldPen = dc.SelectObject(&pen);
-			CBrush brush;
-			brush.CreateSolidBrush(RGB(54, 138, 255));
-			CBrush* oldBrush = dc.SelectObject(&brush);
-			//dc.Rectangle(point.x, point.y, point.x + this->characterMatrix->GetHangleWidth(), point.y + this->characterMatrix->GetHeigh());
-			Long x = this->positioner->GetX(this, this->line, this->positioner->GetColumn(this, this->line, point.x));
-			Long y = this->positioner->GetY(this, this->paper->GetCurrent());
-			Long z = this->positioner->GetX(this, this->line, this->line->GetCurrent()-1) + this->characterMatrix->GetWidths(32);
-			Long a = this->positioner->GetY(this, this->paper->GetCurrent()) + this->characterMatrix->GetHeigh();
-			dc.Rectangle(x, y, z, a);
-			dc.SetTextColor(RGB(255, 255, 255));
-			dc.SetBkMode(TRANSPARENT);
-			//dc.TextOut(point.x, point.y, CString("b"));
-			dc.DrawText(CString("아놔아아아아아앙"), CRect(x, y, z, a), DT_CENTER);
-			dc.SelectObject(oldPen);
-			dc.SelectObject(oldBrush);
-			
-		}
+		//this->range->MouseDrow(this, &point);
+		Invalidate(FALSE);
+		//if (this->line->GetLength() != 0 && point.x < this->cursorPoint.x && point.y <= this->cursorPoint.y) {
+		//	CClientDC dc(this);
+		//	CPen pen;
+		//	pen.CreatePen(PS_INSIDEFRAME, 0, RGB(54, 138, 255));
+		//	CPen* oldPen = dc.SelectObject(&pen);
+		//	CBrush brush;
+		//	brush.CreateSolidBrush(RGB(54, 138, 255));
+		//	CBrush* oldBrush = dc.SelectObject(&brush);
+		//	//dc.Rectangle(point.x, point.y, point.x + this->characterMatrix->GetHangleWidth(), point.y + this->characterMatrix->GetHeigh());
+		//	Long x = this->positioner->GetX(this, this->line, this->positioner->GetColumn(this, this->line, point.x));
+		//	Long y = this->positioner->GetY(this, this->paper->GetCurrent());
+		//	Long z = this->positioner->GetX(this, this->line, this->line->GetCurrent()-1) + this->characterMatrix->GetWidths(32);
+		//	Long a = this->positioner->GetY(this, this->paper->GetCurrent()) + this->characterMatrix->GetHeigh();
+		//	dc.Rectangle(x, y, z, a);
+		//	dc.SetTextColor(RGB(255, 255, 255));
+		//	dc.SetBkMode(TRANSPARENT);
+		//	//dc.TextOut(point.x, point.y, CString("b"));
+		//	//dc.DrawText(CString("아놔아아아아아앙"), CRect(x, y, z, a), DT_CENTER);
+		//	dc.SelectObject(oldPen);
+		//	dc.SelectObject(oldBrush);
+		//}
 		//else if (this->line->GetLength() != 0 && point.x > this->cursorPoint.x && point.y >= this->cursorPoint.y) {
 		//	CClientDC dc(this);
 		//	CPen pen;
@@ -463,43 +435,20 @@ void NotePad::OnMouseMove(UINT nFlags, CPoint point) {
 		//	Long z = this->positioner->GetX(this, this->line, this->line->GetCurrent()) + this->characterMatrix->GetWidths(32);
 		//	Long a = this->positioner->GetY(this, this->paper->GetCurrent()) + this->characterMatrix->GetHeigh();
 		//	dc.Rectangle(x, y, z, a);
-		//	/*if (this->cursorPoint.y < point.y) {
-		//		Long line = this->positioner->GetRow(this, point.y);
-		//		x = this->positioner->GetX(this, this->paper->GetAt(line), this->positioner->GetColumn(this, this->paper->GetAt(line), point.x));
-		//		y = this->positioner->GetY(this, line);
-		//		z = this->positioner->GetX(this, this->paper->GetAt(line), this->positioner->GetColumn(this, this->paper->GetAt(line), point.x) + this->characterMatrix->GetWidths(32));
-		//		a = this->positioner->GetY(this, line + this->characterMatrix->GetHeigh());
-		//		dc.Rectangle(x, y, z, a);
-		//	}*/
+			//if (this->cursorPoint.y < point.y) {
+			//	Long line = this->positioner->GetRow(this, point.y);
+			//	x = this->positioner->GetX(this, this->paper->GetAt(line), this->positioner->GetColumn(this, this->paper->GetAt(line), point.x));
+			//	y = this->positioner->GetY(this, line);
+			//	z = this->positioner->GetX(this, this->paper->GetAt(line), this->positioner->GetColumn(this, this->paper->GetAt(line), point.x) + this->characterMatrix->GetWidths(32));
+			//	a = this->positioner->GetY(this, line + this->characterMatrix->GetHeigh());
+			//	dc.Rectangle(x, y, z, a);
+			//}
 		//	
 		//	dc.SelectObject(oldPen);
 		//	dc.SelectObject(oldBrush);
 		//}
 	}
-
 		
-	    this->cursorPoint = point;
-
-
-	
-	
-	//CClientDC dc(this);
-	//dc.Rectangle(point.x, point.y, point.x + 10, point.y + 10);
-	//CPen pen;
-	//pen.CreatePen(PS_DOT, 3, RGB(255, 0, 0));    // 빨간색 펜을 생성
-	//CPen* oldPen = dc.SelectObject(&pen);
-
-	//CBrush brush;
-	//brush.CreateSolidBrush(RGB(255, 128, 0));     // 오렌지색 채움색을 생성
-	//CBrush* oldBrush = dc.SelectObject(&brush);
-
-	//dc.Rectangle(point.x + 10, point.y + 10, point.x + 30, point.y + 30);
-
-	//dc.SelectObject(oldBrush);
-
-
-	//dc.SelectObject(oldPen);     // 시스템 펜 객체를 돌려줌
-
-	//dc.SelectObject(oldBrush);    // 시스템 브러시 객체를 돌려줌
+	    //this->cursorPoint = point;
 
 }
