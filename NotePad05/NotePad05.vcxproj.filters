@@ -5,225 +5,234 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4f646be3-1515-4ed0-ae27-56754e633bdd}</UniqueIdentifier>
+    <Filter Include="입력 단위">
+      <UniqueIdentifier>{53b9970c-54a2-49d9-9814-4278d1cab262}</UniqueIdentifier>
     </Filter>
-    <Filter Include="KeyAction">
+    <Filter Include="캐럿">
+      <UniqueIdentifier>{4cad0a58-34bb-49dd-a43b-fa7274600d1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="키입력">
       <UniqueIdentifier>{52f22eb8-30d3-45f5-8ee2-774030cd3fb9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="입출력">
+      <UniqueIdentifier>{70bd3ea7-40fe-46ee-b295-1832b51f2a23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="패턴적용">
+      <UniqueIdentifier>{3d7c7b2d-4618-40fd-9ea1-62e95db277ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="새폴더\Array.cpp">
+    <ClCompile Include="소스파일\BackSpaceKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\DeleteKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\DownKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\EndKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\EscKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\HomeKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\LeftKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\NextKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\PriorKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\RightKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\UpKey.cpp">
+      <Filter>키입력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Caret.cpp">
+      <Filter>캐럿</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\CaretController.cpp">
+      <Filter>캐럿</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\CharacterMatrix.cpp">
+      <Filter>캐럿</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Positioner.cpp">
+      <Filter>캐럿</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Character.cpp">
+      <Filter>입력 단위</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\DoubleByteCharacter.cpp">
+      <Filter>입력 단위</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Glyph.cpp">
+      <Filter>입력 단위</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Line.cpp">
+      <Filter>입력 단위</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Paper.cpp">
+      <Filter>입력 단위</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\SingleByteCharacter.cpp">
+      <Filter>입력 단위</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\LoadFile.cpp">
+      <Filter>입출력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\SaveFile.cpp">
+      <Filter>입출력</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\CharacterMatrixSingletonPattern.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\GlyphFactory.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Observer.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Subject.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Composite.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\ActionCreator.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\KeyAction.cpp">
+      <Filter>패턴적용</Filter>
+    </ClCompile>
+    <ClCompile Include="소스파일\Array.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="새폴더\Caret.cpp">
+    <ClCompile Include="소스파일\MouseAction.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="새폴더\CaretController.cpp">
+    <ClCompile Include="소스파일\NotePad.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="새폴더\Character.cpp">
+    <ClCompile Include="소스파일\NotePadApp.cpp">
       <Filter>리소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="새폴더\CharacterMatrix.cpp">
+    <ClCompile Include="소스파일\Range.cpp">
       <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\CharacterMatrixSingletonPattern.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Composite.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\DoubleByteCharacter.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Glyph.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\GlyphFactory.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Line.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\LoadFile.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\MouseAction.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\NotePad.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\NotePadApp.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Observer.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Paper.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Positioner.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\SaveFile.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\SingleByteCharacter.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Subject.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\Range.cpp">
-      <Filter>리소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\DownKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\EndKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\HomeKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\KeyAction.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\LeftKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\RightKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\UpKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\ActionCreator.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\PriorKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\NextKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\BackSpaceKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\DeleteKey.cpp">
-      <Filter>KeyAction</Filter>
-    </ClCompile>
-    <ClCompile Include="새폴더\EscKey.cpp">
-      <Filter>KeyAction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="새폴더\Array.h">
+    <ClInclude Include="소스파일\BackSpaceKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\DeleteKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\DownKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\EndKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\EscKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\HomeKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\LeftKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\NextKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\PriorKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\RightKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\UpKey.h">
+      <Filter>키입력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Caret.h">
+      <Filter>캐럿</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\CaretController.h">
+      <Filter>캐럿</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\CharacterMatrix.h">
+      <Filter>캐럿</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Positioner.h">
+      <Filter>캐럿</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Character.h">
+      <Filter>입력 단위</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\DoubleByteCharacter.h">
+      <Filter>입력 단위</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Glyph.h">
+      <Filter>입력 단위</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Line.h">
+      <Filter>입력 단위</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Paper.h">
+      <Filter>입력 단위</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\SingleByteCharacter.h">
+      <Filter>입력 단위</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\LoadFile.h">
+      <Filter>입출력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\SaveFile.h">
+      <Filter>입출력</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\CharacterMatrixSingletonPattern.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\GlyphFactory.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Observer.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Subject.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Composite.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\ActionCreator.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\KeyAction.h">
+      <Filter>패턴적용</Filter>
+    </ClInclude>
+    <ClInclude Include="소스파일\Array.h">
       <Filter>리소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="새폴더\Caret.h">
+    <ClInclude Include="소스파일\MouseAction.h">
       <Filter>리소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="새폴더\CaretController.h">
+    <ClInclude Include="소스파일\NotePad.h">
       <Filter>리소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="새폴더\Character.h">
+    <ClInclude Include="소스파일\NotePadApp.h">
       <Filter>리소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="새폴더\CharacterMatrix.h">
+    <ClInclude Include="소스파일\Range.h">
       <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\CharacterMatrixSingletonPattern.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Composite.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\DoubleByteCharacter.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Glyph.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\GlyphFactory.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Line.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\LoadFile.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\MouseAction.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\NotePad.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\NotePadApp.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Observer.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Paper.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Positioner.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\SaveFile.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\SingleByteCharacter.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Subject.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\Range.h">
-      <Filter>리소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\DownKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\EndKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\HomeKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\KeyAction.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\LeftKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\RightKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\UpKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\ActionCreator.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\PriorKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\NextKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\BackSpaceKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\DeleteKey.h">
-      <Filter>KeyAction</Filter>
-    </ClInclude>
-    <ClInclude Include="새폴더\EscKey.h">
-      <Filter>KeyAction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -205,11 +205,6 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 			i++;
 		}
 	}
-
-	//else if (nChar == VK_ESCAPE) {
-	//	this->isComposition = FALSE;
-	//}
-
 	if (this->isComposition != FALSE) {
 		this->isComposition = FALSE;
 	}
