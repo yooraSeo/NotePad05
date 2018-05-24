@@ -36,7 +36,9 @@ public:
 	Glyph* SetPaper(Glyph* paper);
 	Glyph* SetLine(Glyph* line);
 	BOOL SetIsComposition(BOOL ret);
-	//CPoint GetCursorPoint() const;
+	BOOL GetIsDragging() const;
+	CPoint GetCursorPoint() const;
+	
 private:
 	string name;
 	Glyph* paper;
@@ -99,6 +101,12 @@ inline Glyph* NotePad::SetPaper(Glyph* paper) {
 inline BOOL NotePad::SetIsComposition(BOOL ret) {
 	this->isComposition = ret;
 	return this->isComposition;
+}
+inline BOOL NotePad::GetIsDragging() const {
+	return this->isDragging;
+}
+inline CPoint NotePad::GetCursorPoint() const {
+	return this->cursorPoint;
 }
 #endif//_NOTEPAD_H
 

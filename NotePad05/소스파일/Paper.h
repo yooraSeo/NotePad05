@@ -18,6 +18,7 @@ public:
 	~Paper();
 	virtual Glyph* Clone();
 	virtual string MakeString();
+	virtual void Accept(Visitor& visitor);
 	Paper& operator=(const Paper& source);
 };
 

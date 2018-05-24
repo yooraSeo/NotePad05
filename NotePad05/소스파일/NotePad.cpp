@@ -23,6 +23,7 @@
 #include "Positioner.h"
 #include "Range.h"
 #include "ActionCreator.h"
+#include "PaintVisitor.h"
 
 
 #include <string>
@@ -119,36 +120,21 @@ int NotePad::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 }
 
 void NotePad::OnPaint() {
-	Long row;
-	Long i = 0;
-	string text;
-	//Glyph* line;
-	Long height;
-	row = this->paper->GetLength();
 	CPaintDC dc(this);
 	this->GetFont();
 	CFont *pOldFont = dc.SelectObject(&this->font); //만든 폰트 적용	
 	//CFont font = this->GetFont;
-	Long num; //폭을 받을 실수
-	CString cstr; //화면에 출력한 문자열
-	char cha[20];
-	while (i < row) {
-		this->line = this->paper->GetAt(i);
-		text = this->line->MakeString();
-		height = this->characterMatrix->GetHeigh();
-		dc.TextOut(0, (i * height), CString(text.c_str()));
-		
-		CSize display_size = dc.GetTextExtent(text.c_str()); //화면에 쓰여진 문자열의 길이 구하기
-		num = display_size.cx; //문자열을 실수로 받음
-		this->line = paper->GetAt(paper->GetCurrent());
-			cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,  마우스x : %d, 마우스y : %d,  조합 : %d",
-			paper->GetCurrent()+1,this->line->GetCurrent()+1,
-			this->GetCaretPos().x, this->GetCaretPos().y, this->cursorPoint.x, this->cursorPoint.y, this->isDragging);
-		dc.TextOut(600, 80, CString(cstr)); //출력
+	
+	PaintVisitor paintVisitor(&dc,this);
+	this->paper->Accept(paintVisitor);
 
-		i++;
-	}
-	//GetConsoleCursorInfo()
+	
+	line = paper->GetAt(paper->GetCurrent());
+	CString cstr;
+	cstr.Format("줄 : %d, 칸 : %d, x : %d, y : %d,  마우스x : %d, 마우스y : %d,  조합 : %d",
+		paper->GetCurrent() + 1, line->GetCurrent() + 1,
+		this->GetCaretPos().x, this->GetCaretPos().y, this->GetCursorPoint().x, this->GetCursorPoint().y, this->GetIsDragging());
+	dc.TextOut(600, 80, CString(cstr)); //출력
 }
 
 
@@ -176,6 +162,7 @@ void NotePad::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		KeyAction* keyAction = actionCreator.Create(this, nChar);
 		keyAction->Action();
 	}
+
 	this->Invalidate();
 }
 
@@ -209,7 +196,7 @@ void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		this->isComposition = FALSE;
 	}
 	this->Notify();
-	this->Invalidate();
+	this->Invalidate(FALSE);
 }
 
 LRESULT NotePad::OnImeChar(WPARAM wParam, LPARAM lParam) {
@@ -230,8 +217,9 @@ LRESULT NotePad::OnImeChar(WPARAM wParam, LPARAM lParam) {
 	this->line->Add(glyph);//(new DoubleByteCharacter(nChar));
 	this->line->Next();
 	this->isComposition = FALSE;
-	this->Invalidate();
+	
 	this->Notify();
+	this->Invalidate(FALSE);
 
 	return 0;
 }
@@ -391,7 +379,7 @@ void NotePad::OnLButtonDulClk(UINT nFlags, CPoint point) {
 void NotePad::OnMouseMove(UINT nFlags, CPoint point) {
 
 	this->line->SetCurrent(point.x);
-
+	//Invalidate();
 	if (this->isDragging == TRUE) {
 		//this->range->MouseDrow(this, &point);
 		Invalidate(FALSE);

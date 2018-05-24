@@ -14,6 +14,7 @@
 typedef signed long int Long;
 using namespace std;
 
+class Visitor;
 class  Glyph {
 public:
 	Glyph();
@@ -27,6 +28,7 @@ public:
 	virtual Long Next() { return 0; }
 	virtual Long First() { return 0; }
 	virtual Long Last() { return 0; }
+	virtual void Accept(Visitor& Visitor) = 0;
 	virtual Long GetCapacity() const { return 0; }
 	virtual Long GetLength() const { return 0; }
 	virtual Long GetCurrent() const { return 0; }

@@ -29,6 +29,8 @@ ActionCreator::~ActionCreator() {
 }
 
 KeyAction* ActionCreator::Create(NotePad* notePad, UINT nChar) {
+
+
 	switch (nChar)
 	{
 	case VK_PRIOR:
@@ -64,6 +66,7 @@ KeyAction* ActionCreator::Create(NotePad* notePad, UINT nChar) {
 	case VK_ESCAPE:
 		this->keyAction = new EscKey(notePad);
 		break;
+	
 	default:
 		break;
 	}

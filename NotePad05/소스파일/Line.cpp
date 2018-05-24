@@ -7,6 +7,7 @@
 */
 //Line.cpp
 #include "Line.h"
+#include "Visitor.h"
 
 Line::Line(Long capacity):Composite(capacity){
 }
@@ -19,6 +20,10 @@ Line::~Line() {
 
 Glyph* Line::Clone() {
 	return new Line(*this);
+}
+
+void Line::Accept(Visitor& visitor) {
+	visitor.Visit(this);
 }
 
 string Line::MakeString() {

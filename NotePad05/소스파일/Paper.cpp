@@ -7,6 +7,7 @@
 */
 //Paper.cpp
 #include "Paper.h"
+#include "Visitor.h"
 
 Paper::Paper(Long capacity):Composite(capacity){
 }
@@ -19,6 +20,10 @@ Paper::~Paper() {
 
 Glyph* Paper::Clone() {
 	return new Paper(*this);
+}
+
+void Paper::Accept(Visitor& visitor) {
+	visitor.Visit(this);
 }
 
 string Paper::MakeString() {

@@ -14,7 +14,7 @@ PriorKey::~PriorKey() {
 }
 
 void PriorKey::Action() {
-	//CPoint point = this->notePad->GetCaretPos();
+	
 	Paper* paper = (Paper*)this->notePad->GetPaper();
 	Long row = paper->GetCurrent();
 	Line* line = (Line*)this->notePad->GetLine();

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ShiftRightKey.cpp" />
     <ClCompile Include="소스파일\ActionCreator.cpp" />
     <ClCompile Include="소스파일\Array.cpp" />
     <ClCompile Include="소스파일\BackSpaceKey.cpp" />
@@ -45,17 +46,21 @@
     <ClCompile Include="소스파일\NotePad.cpp" />
     <ClCompile Include="소스파일\NotePadApp.cpp" />
     <ClCompile Include="소스파일\Observer.cpp" />
+    <ClCompile Include="소스파일\PaintVisitor.cpp" />
     <ClCompile Include="소스파일\Paper.cpp" />
     <ClCompile Include="소스파일\Positioner.cpp" />
     <ClCompile Include="소스파일\PriorKey.cpp" />
     <ClCompile Include="소스파일\Range.cpp" />
     <ClCompile Include="소스파일\RightKey.cpp" />
     <ClCompile Include="소스파일\SaveFile.cpp" />
+    <ClCompile Include="소스파일\ShiftLeftKey.cpp" />
     <ClCompile Include="소스파일\SingleByteCharacter.cpp" />
     <ClCompile Include="소스파일\Subject.cpp" />
     <ClCompile Include="소스파일\UpKey.cpp" />
+    <ClCompile Include="소스파일\Visitor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ShiftRightKey.h" />
     <ClInclude Include="소스파일\ActionCreator.h" />
     <ClInclude Include="소스파일\Array.h" />
     <ClInclude Include="소스파일\BackSpaceKey.h" />
@@ -82,15 +87,18 @@
     <ClInclude Include="소스파일\NotePad.h" />
     <ClInclude Include="소스파일\NotePadApp.h" />
     <ClInclude Include="소스파일\Observer.h" />
+    <ClInclude Include="소스파일\PaintVisitor.h" />
     <ClInclude Include="소스파일\Paper.h" />
     <ClInclude Include="소스파일\Positioner.h" />
     <ClInclude Include="소스파일\PriorKey.h" />
     <ClInclude Include="소스파일\Range.h" />
     <ClInclude Include="소스파일\RightKey.h" />
     <ClInclude Include="소스파일\SaveFile.h" />
+    <ClInclude Include="소스파일\ShiftLeftKey.h" />
     <ClInclude Include="소스파일\SingleByteCharacter.h" />
     <ClInclude Include="소스파일\Subject.h" />
     <ClInclude Include="소스파일\UpKey.h" />
+    <ClInclude Include="소스파일\Visitor.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

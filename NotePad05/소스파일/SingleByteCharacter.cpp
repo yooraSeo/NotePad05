@@ -7,6 +7,7 @@
 */
 //SingleByteCharacter.cpp
 #include "SingleByteCharacter.h"
+#include "Visitor.h"
 
 SingleByteCharacter::SingleByteCharacter(){
 	this->object = ' ';
@@ -31,4 +32,8 @@ string SingleByteCharacter::MakeString() {
 Glyph* SingleByteCharacter::Clone() {
 	
 	return new SingleByteCharacter(*this);
+}
+
+void SingleByteCharacter::Accept(Visitor& visitor) {
+	visitor.Visit(this);
 }

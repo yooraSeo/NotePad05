@@ -7,6 +7,7 @@
 */
 //DoubleByteCharacter.cpp
 #include "DoubleByteCharacter.h"
+#include "Visitor.h"
 
 DoubleByteCharacter::DoubleByteCharacter()
 {
@@ -47,4 +48,8 @@ string DoubleByteCharacter::MakeString() {
 
 
 	return text;
+}
+
+void DoubleByteCharacter::Accept(Visitor& visitor) {
+	visitor.Visit(this);
 }
