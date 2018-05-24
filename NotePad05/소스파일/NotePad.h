@@ -38,6 +38,7 @@ public:
 	BOOL SetIsComposition(BOOL ret);
 	BOOL GetIsDragging() const;
 	CPoint GetCursorPoint() const;
+	BOOL GetIsReverse() const;
 	
 private:
 	string name;
@@ -45,7 +46,6 @@ private:
 	Glyph* line;
 	Glyph* glyph;
 	UINT nChar;
-	CFont font; //폰트 선언
 	CPoint cursorPoint;
 	CharacterMatrix* characterMatrix;
 	CaretController* caretController;
@@ -72,8 +72,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	BOOL isComposition = FALSE;
-	BOOL isDragging = FALSE;
+	BOOL isComposition;
+	BOOL isDragging;
+	BOOL isReverse;
 };
 inline BOOL NotePad::GetIsComposition() const {
 	return this->isComposition;
@@ -107,6 +108,9 @@ inline BOOL NotePad::GetIsDragging() const {
 }
 inline CPoint NotePad::GetCursorPoint() const {
 	return this->cursorPoint;
+}
+inline BOOL NotePad::GetIsReverse() const {
+	return this->isReverse;
 }
 #endif//_NOTEPAD_H
 

@@ -30,11 +30,8 @@ void PaintVisitor::Visit(Paper* paper) {
 		string text = line->MakeString();
 		Long height = characterMatrix->GetHeigh();
 		this->dc->TextOut(0, (i * height), CString(text.c_str()));
-
 		i++;
-
 	}
-
 }
 
 void PaintVisitor::Visit(Line* line) {

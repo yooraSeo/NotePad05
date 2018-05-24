@@ -133,11 +133,8 @@
     <ClCompile Include="소스파일\PaintVisitor.cpp">
       <Filter>패턴적용</Filter>
     </ClCompile>
-    <ClCompile Include="소스파일\ShiftLeftKey.cpp">
-      <Filter>키입력</Filter>
-    </ClCompile>
-    <ClCompile Include="ShiftRightKey.cpp">
-      <Filter>키입력</Filter>
+    <ClCompile Include="소스파일\ReverseVisitor.cpp">
+      <Filter>패턴적용</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -252,11 +249,8 @@
     <ClInclude Include="소스파일\PaintVisitor.h">
       <Filter>패턴적용</Filter>
     </ClInclude>
-    <ClInclude Include="소스파일\ShiftLeftKey.h">
-      <Filter>키입력</Filter>
-    </ClInclude>
-    <ClInclude Include="ShiftRightKey.h">
-      <Filter>키입력</Filter>
+    <ClInclude Include="소스파일\ReverseVisitor.h">
+      <Filter>패턴적용</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
