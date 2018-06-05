@@ -49,6 +49,7 @@ BEGIN_MESSAGE_MAP(NotePad, CFrameWnd)
 	ON_WM_LBUTTONDBLCLK()
 	ON_WM_MOUSEMOVE()
 	ON_WM_CLOSE()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 
@@ -112,9 +113,11 @@ void NotePad::OnPaint() {
 		this->paper->GetCurrent() + 1, this->line->GetCurrent() + 1,
 		this->GetCaretPos().x, this->GetCaretPos().y, this->GetCursorPoint().x, this->GetCursorPoint().y, this->GetIsRange());
 	dc.TextOut(600, 80, CString(cstr)); //Ãâ·Â
-
 }
 
+BOOL NotePad::OnEraseBkgnd(CDC* pDC) {
+	return TRUE;
+}
 
 void NotePad::OnClose() {
 	CString name;
@@ -189,12 +192,12 @@ void NotePad::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
 		}
 
 	}
-
 	this->Notify();
 	this->Invalidate();
 }
 
 void NotePad::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
+
 	if (this->isRange != FALSE) {
 		this->isRange = FALSE;
 	}

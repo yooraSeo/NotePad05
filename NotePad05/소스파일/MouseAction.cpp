@@ -40,19 +40,24 @@ MouseAction::~MouseAction() {
 CPoint MouseAction::Move(UINT nFlags, CPoint point) {
 	Paper* paper = (Paper*)this->notePad->GetPaper();
 	Long row = this->positioner->GetRow(this->notePad, point.y);
-	paper->SetCurrent(row);
-	this->notePad->SetPaper(paper);
-	Line* line = (Line*)this->notePad->GetPaper()->GetAt(row);
-	Long column = this->positioner->GetColumn(this->notePad, line, point.x);
-	line->SetCurrent(column);
-	this->notePad->SetLine(line);
+	if (row >= 0) {
+		paper->SetCurrent(row);
+		this->notePad->SetPaper(paper);
+		Line* line = (Line*)this->notePad->GetPaper()->GetAt(row);
+		Long column = this->positioner->GetColumn(this->notePad, line, point.x);
+		line->SetCurrent(column);
+		this->notePad->SetLine(line);
+	}
+	
 	//this->notePad->Notify();
 	return this->point;
 }
 
 void MouseAction::DoubleClicked(NotePad* notePad, Range* range){
+
 	Line* line = (Line*)notePad->GetLine();
 	Long column = line->GetCurrent();
+
 	if (column != 0 && column < line->GetLength()) {
 		IntervalLeftKey* intervalLeftKey = new IntervalLeftKey(notePad);
 		intervalLeftKey->IntervalAction();
@@ -78,6 +83,7 @@ void MouseAction::DoubleClicked(NotePad* notePad, Range* range){
 		intervalLeftKey->IntervalAction();
 		range->Sum(notePad);
 	}
+
 }
 
 

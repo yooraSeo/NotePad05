@@ -40,12 +40,13 @@ void IntervalRightKey::IntervalAction() {
 			if (code == this->GetSymbols()[0]) {
 				line->Prev();
 				while (code == this->GetSymbols()[0] && current < line->GetLength()) {
-					current = line->Next();
+					current = line->Next(); 
 					if (current < line->GetLength()) {
 						str = line->GetAt(current)->MakeString();
 						code = str[0];
 					}
 				}
+			
 			}
 		}
 		else {
@@ -55,7 +56,7 @@ void IntervalRightKey::IntervalAction() {
 	else if (row < paper->GetLength() - 1) {
 		row = paper->Next();
 		line = (Line*)paper->GetAt(row);
-		line->First();
+		column = line->First();
 		notePad->SetPaper(paper);
 	}
 	notePad->SetLine(line);

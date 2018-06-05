@@ -11,10 +11,6 @@ public:
 	~IntervalKeyAction();
 	virtual void IntervalAction() = 0;
 	Long* GetSymbols() const;
-	//void RightKey(NotePad* notePad);
-	//void LeftKey(NotePad* notePad);
-	//void HomeKey(NotePad* notePad);
-	//void EndKey(NotePad* notePad);
 private:
 	Long symbols[13];
 	NotePad* notePad;

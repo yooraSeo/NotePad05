@@ -31,12 +31,13 @@ void IntervalLeftKey::IntervalAction() {
 			while (i < 13 && this->GetSymbols()[i] != code) {
 				i++;
 			}
-			if (this->GetSymbols()[0] == code || this->GetSymbols()[i] == code) {
+			if (this->GetSymbols()[i] == code) {
 				getSymbol = TRUE;
 			}
 			current = line->Prev();
 		}
 		if (getSymbol == TRUE) {
+			//line->Next();
 			if (code == this->GetSymbols()[0]) {
 				line->Next();
 				while (code == this->GetSymbols()[0] && current > 0) {
@@ -46,7 +47,8 @@ void IntervalLeftKey::IntervalAction() {
 				}
 			}
 			if (current != 0) {
-				line->Next();
+				line->Next(); //입력대기 위치
+				//line->Next();
 			}
 		}
 		else {

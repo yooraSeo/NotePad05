@@ -6,8 +6,8 @@
 #include "Line.h"
 #include "DoubleByteCharacter.h"
 #include "SingleByteCharacter.h"
-//#include "GlyphFactory.h"
 #include <string.h>
+
 using namespace std;
 LoadFile::LoadFile(NotePad* notePad, string name) {
 	this->notePad = notePad;
@@ -28,7 +28,7 @@ LoadFile::LoadFile(NotePad* notePad, string name) {
 			paper->Add(new Line);
 			line = (Line*)paper->GetAt(paper->GetCurrent());
 			i = 0;
-			while (i < 256 && str[i] != '\n') {
+			while (i < 256 && str[i] != '\n' && str[i] !='\0') {
 				//if (str[i] > 127) {
 				if (str[i] & 0x80){
 					cha[0] = str[i];

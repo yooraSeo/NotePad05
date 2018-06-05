@@ -44,7 +44,11 @@ Long Positioner::GetX(NotePad *notePad, Glyph* line, Long column) {
 	CharacterMatrix* characterMatrix = CharacterMatrixSingletonPattern::Instance(notePad);
 	string str;
 	Long i = 0;
-	
+	//
+	//Long z = 32;
+	//Long x = characterMatrix->GetWidths(z);
+	//x = x;
+
 	(this->x) = 0;
 	while (i < column) {
 		if (dynamic_cast<SingleByteCharacter*>(line->GetAt(i))) {

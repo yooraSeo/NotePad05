@@ -25,6 +25,7 @@ void PaintVisitor::Visit(Paper* paper) {
 		Glyph* line = paper->GetAt(i);
 		string text = line->MakeString();
 		Long heigh = characterMatrix->GetHeigh();
+		//this->dc->SetBkMode(TRANSPARENT);
 		this->dc->TextOut(0, (i * heigh), CString(text.c_str()));
 		i++;
 	}
