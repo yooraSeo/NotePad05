@@ -91,5 +91,4 @@ if (row > 0) {
 }
 notePad->SetPaper(paper);
 notePad->SetLine(line);
-notePad->Notify();
 }

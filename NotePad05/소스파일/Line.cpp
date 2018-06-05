@@ -28,13 +28,35 @@ void Line::Accept(Visitor& visitor) {
 
 string Line::MakeString() {
 	string text = "";
+	string temp = "";
 	Long i = 0;
 	Glyph* glyph;
-	
+
 	while (i < this->GetLength()) {
 		if (this->glyphes.GetAt(i) != NULL) {
 			glyph = this->glyphes.GetAt(i);
-			text += glyph->MakeString();
+			temp = glyph->MakeString();
+			if (temp == "\t") {
+				text += " ";
+			}
+			else {
+				text += glyph->MakeString();
+			}
+		}
+		i++;
+	}
+	return text;
+}
+
+string Line::GetTab() {
+	string text = "";
+	Long i = 0;
+	Glyph* glyph;
+
+	while (i < this->GetLength()) {
+		if (this->glyphes.GetAt(i) != NULL) {
+			glyph = this->glyphes.GetAt(i);
+			text += glyph->GetTab();
 		}
 		i++;
 	}

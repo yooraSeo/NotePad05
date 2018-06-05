@@ -49,7 +49,6 @@ Caret& Caret::operator=(const Caret& source) {
 }
 
 bool Caret::Move(Long x, Long y) {
-	
 	CPoint point(x, y);
 	this->notePad->SetCaretPos(point);	
 	return true;

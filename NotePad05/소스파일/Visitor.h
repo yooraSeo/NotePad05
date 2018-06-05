@@ -7,7 +7,7 @@ class Paper;
 class Line;
 class DoubleByteCharacter;
 class SingleByteCharacter;
-class Character;
+
 class Visitor {
 public:
 	~Visitor();
@@ -18,4 +18,5 @@ public:
 protected:
 	Visitor();
 };
+
 #endif // !_VISITOR_H

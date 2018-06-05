@@ -36,6 +36,12 @@
     <ClCompile Include="소스파일\Glyph.cpp" />
     <ClCompile Include="소스파일\GlyphFactory.cpp" />
     <ClCompile Include="소스파일\HomeKey.cpp" />
+    <ClCompile Include="소스파일\IntervalActionCreator.cpp" />
+    <ClCompile Include="소스파일\IntervalEndKey.cpp" />
+    <ClCompile Include="소스파일\IntervalHomeKey.cpp" />
+    <ClCompile Include="소스파일\IntervalKeyAction.cpp" />
+    <ClCompile Include="소스파일\IntervalLeftKey.cpp" />
+    <ClCompile Include="소스파일\IntervalRightKey.cpp" />
     <ClCompile Include="소스파일\KeyAction.cpp" />
     <ClCompile Include="소스파일\LeftKey.cpp" />
     <ClCompile Include="소스파일\Line.cpp" />
@@ -50,7 +56,8 @@
     <ClCompile Include="소스파일\Positioner.cpp" />
     <ClCompile Include="소스파일\PriorKey.cpp" />
     <ClCompile Include="소스파일\Range.cpp" />
-    <ClCompile Include="소스파일\ReverseVisitor.cpp" />
+    <ClCompile Include="소스파일\RangeDelete.cpp" />
+    <ClCompile Include="소스파일\Reverse.cpp" />
     <ClCompile Include="소스파일\RightKey.cpp" />
     <ClCompile Include="소스파일\SaveFile.cpp" />
     <ClCompile Include="소스파일\SingleByteCharacter.cpp" />
@@ -76,6 +83,12 @@
     <ClInclude Include="소스파일\Glyph.h" />
     <ClInclude Include="소스파일\GlyphFactory.h" />
     <ClInclude Include="소스파일\HomeKey.h" />
+    <ClInclude Include="소스파일\IntervalActionCreator.h" />
+    <ClInclude Include="소스파일\IntervalEndKey.h" />
+    <ClInclude Include="소스파일\IntervalHomeKey.h" />
+    <ClInclude Include="소스파일\IntervalKeyAction.h" />
+    <ClInclude Include="소스파일\IntervalLeftKey.h" />
+    <ClInclude Include="소스파일\IntervalRightKey.h" />
     <ClInclude Include="소스파일\KeyAction.h" />
     <ClInclude Include="소스파일\LeftKey.h" />
     <ClInclude Include="소스파일\Line.h" />
@@ -90,7 +103,8 @@
     <ClInclude Include="소스파일\Positioner.h" />
     <ClInclude Include="소스파일\PriorKey.h" />
     <ClInclude Include="소스파일\Range.h" />
-    <ClInclude Include="소스파일\ReverseVisitor.h" />
+    <ClInclude Include="소스파일\RangeDelete.h" />
+    <ClInclude Include="소스파일\Reverse.h" />
     <ClInclude Include="소스파일\RightKey.h" />
     <ClInclude Include="소스파일\SaveFile.h" />
     <ClInclude Include="소스파일\SingleByteCharacter.h" />

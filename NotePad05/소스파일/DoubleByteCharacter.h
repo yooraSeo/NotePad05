@@ -22,6 +22,7 @@ public:
 	virtual Glyph* Clone();
 	DoubleByteCharacter& operator=(const DoubleByteCharacter& source);
 	virtual string MakeString();
+	virtual string GetTab();
 	virtual void Accept(Visitor& visitor);
 
 private:

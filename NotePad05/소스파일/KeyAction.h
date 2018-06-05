@@ -10,14 +10,18 @@
 #ifndef _KEYACTION_H
 #define _KEYACTION_H
 
+typedef signed long int Long;
 class NotePad;
 class KeyAction{
 public:
 	KeyAction(NotePad* notePad);	
 	~KeyAction();
 	virtual void Action() = 0;
+	
 protected:
 	NotePad * notePad;
+
 };
+
 
 #endif // !_KEYACTION_H

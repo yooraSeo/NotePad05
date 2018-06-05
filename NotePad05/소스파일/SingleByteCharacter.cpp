@@ -26,6 +26,19 @@ SingleByteCharacter& SingleByteCharacter::operator=(const SingleByteCharacter& s
 }
 string SingleByteCharacter::MakeString() {
 	string buffer;
+	string temp;
+	temp = this->object;
+	if (temp == "\t") {
+		buffer = " ";
+	}
+	else {
+		buffer = this->object;
+	}
+	return buffer;
+}
+
+string SingleByteCharacter::GetTab() {
+	string buffer;
 	buffer = this->object;
 	return buffer;
 }

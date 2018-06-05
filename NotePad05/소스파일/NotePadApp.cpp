@@ -10,7 +10,8 @@
 #include "NotePad.h"
 BOOL NotePadApp::InitInstance() {
 	NotePad* notePad = new NotePad;
-	notePad->Create(NULL, (LPCTSTR)"새메모장");
+	DWORD dwStyle = WS_OVERLAPPEDWINDOW | WS_VSCROLL;
+	notePad->Create(NULL, (LPCTSTR)"새메모장", dwStyle);
 	notePad->ShowWindow(this->m_nCmdShow);
 	this->m_pMainWnd = notePad;
 	return TRUE;

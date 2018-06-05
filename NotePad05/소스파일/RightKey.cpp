@@ -28,5 +28,4 @@ void RightKey::Action() {
 		notePad->SetPaper(paper);
 	}
 	this->notePad->SetLine(line);
-	this->notePad->Notify();
 }

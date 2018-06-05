@@ -41,13 +41,17 @@ DoubleByteCharacter& DoubleByteCharacter::operator=(const DoubleByteCharacter& s
 	return *this;
 }
 string DoubleByteCharacter::MakeString() {
-	string text;
+	string buffer;
+	buffer += this->object[0];
+	buffer += this->object[1];
+	return buffer;
+}
 
-	text += this->object[0];
-	text += this->object[1];
-
-
-	return text;
+string DoubleByteCharacter::GetTab() {
+	string buffer;
+	buffer += this->object[0];
+	buffer += this->object[1];
+	return buffer;
 }
 
 void DoubleByteCharacter::Accept(Visitor& visitor) {

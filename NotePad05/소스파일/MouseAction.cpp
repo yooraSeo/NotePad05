@@ -9,6 +9,11 @@
 #include "CharacterMatrixSingletonPattern.h"
 #include "CharacterMatrix.h"
 #include <afxwin.h>
+#include "Range.h"
+#include "IntervalRightKey.h"
+#include "IntervalLeftKey.h"
+
+
 MouseAction::MouseAction() {
 	this->notePad = 0;
 	this->positioner = 0;
@@ -32,7 +37,7 @@ MouseAction::~MouseAction() {
 	
 }
 
-CPoint MouseAction::Clicked(UINT nFlags, CPoint point) {
+CPoint MouseAction::Move(UINT nFlags, CPoint point) {
 	Paper* paper = (Paper*)this->notePad->GetPaper();
 	Long row = this->positioner->GetRow(this->notePad, point.y);
 	paper->SetCurrent(row);
@@ -41,18 +46,38 @@ CPoint MouseAction::Clicked(UINT nFlags, CPoint point) {
 	Long column = this->positioner->GetColumn(this->notePad, line, point.x);
 	line->SetCurrent(column);
 	this->notePad->SetLine(line);
-	this->notePad->Notify();
-	//notePad->Invalidate();
+	//this->notePad->Notify();
 	return this->point;
 }
 
-CPoint MouseAction::DoubleClicked() {
-
-	return this->point;
+void MouseAction::DoubleClicked(NotePad* notePad, Range* range){
+	Line* line = (Line*)notePad->GetLine();
+	Long column = line->GetCurrent();
+	if (column != 0 && column < line->GetLength()) {
+		IntervalLeftKey* intervalLeftKey = new IntervalLeftKey(notePad);
+		intervalLeftKey->IntervalAction();
+		if (notePad->GetLine()->GetCurrent() > 0) {
+			notePad->GetLine()->Next();
+		}
+		range->Reset(notePad);
+		line->SetCurrent(column);
+		notePad->SetLine(line);
+		IntervalRightKey * intervalRightKey = new IntervalRightKey(notePad);
+		intervalRightKey->IntervalAction();
+		range->Sum(notePad);
+	}
+	else if (column == 0) {
+		range->Reset(notePad);
+		IntervalRightKey * intervalRightKey = new IntervalRightKey(notePad);
+		intervalRightKey->IntervalAction();
+		range->Sum(notePad);
+	}
+	else if (column >= notePad->GetLine()->GetLength()) {
+		range->Reset(notePad);
+		IntervalLeftKey* intervalLeftKey = new IntervalLeftKey(notePad);
+		intervalLeftKey->IntervalAction();
+		range->Sum(notePad);
+	}
 }
 
-//CPoint MouseAction::Drag(UINT nFlags, CPoint point) {
-//
-//	return this->point;
-//}
 

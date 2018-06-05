@@ -14,6 +14,4 @@ void EndKey::Action() {
 	Line* line = (Line*)this->notePad->GetLine();
 	Long column = line->Last();
 	notePad->SetLine(line);
-
-	this->notePad->Notify();
 }

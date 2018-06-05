@@ -42,8 +42,9 @@ void CaretController::Update() {
 	Long x = positioner.GetX(notePad, line, column);
 	Long y = positioner.GetY(notePad, row);
 	bool ret;
-	if (caret != 0) {
-		caret = 0;
+	if (caret != NULL) {
+		this->notePad->HideCaret();
+		caret = NULL;
 	}
 	if (notePad->GetIsComposition() == TRUE) {
 		caret = new Caret(notePad, characterMatrix->GetWidths(128), characterMatrix->GetHeigh());

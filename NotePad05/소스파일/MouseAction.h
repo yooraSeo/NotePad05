@@ -1,4 +1,4 @@
-//MouseAction.h
+
 
 #ifndef _MOUSEACTION_H
 #define _MOUSEACTION_H
@@ -7,13 +7,13 @@ typedef signed long int Long;
 class NotePad;
 class Positioner;
 class Glyph;
+class Range;
 class MouseAction {
 public:
 	MouseAction();
 	MouseAction(NotePad* notePad);
-	CPoint Clicked(UINT nFlags, CPoint point);
-	CPoint DoubleClicked();
-	//CPoint Drag(UINT nFlags, CPoint point);
+	CPoint Move(UINT nFlags, CPoint point);
+	void DoubleClicked(NotePad* notePad, Range* range);
 	~MouseAction();
 private:
 	NotePad * notePad;

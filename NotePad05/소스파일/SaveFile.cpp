@@ -11,7 +11,8 @@ SaveFile::SaveFile(string name, Glyph* paper) {
 	file = fopen("새메모장.txt", "wt");
 	if (file != NULL) {
 		while (i < this->paper->GetLength()) {
-			str = this->paper->GetAt(i)->MakeString();
+			//str = this->paper->GetAt(i)->MakeString();
+			str = this->paper->GetAt(i)->GetTab();
 			fprintf(file, "%s\n", str.c_str());
 			i++;
 		}

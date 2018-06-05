@@ -19,6 +19,7 @@ public:
 	virtual ~Line();
 	virtual Glyph* Clone();
 	virtual string MakeString();
+	virtual string GetTab();
 	virtual void Accept(Visitor& visitor);
 	Line& operator=(const Line& sorce);
 };

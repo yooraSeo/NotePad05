@@ -26,16 +26,13 @@ CharacterMatrix::CharacterMatrix(NotePad* notePad) {
 	TEXTMETRIC textMetric;
 	CDC *pDc=notePad->GetDC();
 	GetTextMetrics(pDc->GetSafeHdc(), &textMetric);
-	/*CFont *pCurFont = notePad->GetFont();
-	pDc->SelectObject(pCurFont);*/
 	while (i <= 127) {
 		str =(TCHAR)i;
 		this->widths[i] = (pDc->GetTextExtent(str).cx);
 		i++;
 	}
 	this->widths[128] = (pDc->GetTextExtent("한").cx);
-	this->heigh = textMetric.tmHeight;//폰트 높이의 평균으로 바꿔야함
-	//this->heigh = (pDc.GetTextExtent("한").cy);
+	this->heigh = textMetric.tmHeight;
 }
 
 CharacterMatrix::CharacterMatrix(const CharacterMatrix& source) {

@@ -29,9 +29,12 @@ void Subject::Delete(Observer* observer) {
 }
 
 void Subject::Notify() {
-	Long i = 0;
-	while (i < this->length) {
-		this->observers[i]->Update();
-		i++;
+	//Long i = 0;
+	//while (i < this->length) {
+	//	this->observers[i]->Update();
+	//	i++;
+	//}
+	if (this->length > 0) {
+		this->observers[this->length-1]->Update();
 	}
 }

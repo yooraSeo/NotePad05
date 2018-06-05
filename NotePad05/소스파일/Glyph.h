@@ -20,6 +20,7 @@ public:
 	Glyph();
 	virtual ~Glyph()=0;
 	virtual string MakeString() = 0;
+	virtual string GetTab() = 0;
 	virtual Glyph* Clone()=0;
 	virtual Long Add(Glyph* glyph) { return -1; }
 	virtual Glyph* GetAt(Long index) { return 0; }
@@ -32,6 +33,6 @@ public:
 	virtual Long GetCapacity() const { return 0; }
 	virtual Long GetLength() const { return 0; }
 	virtual Long GetCurrent() const { return 0; }
-	virtual Long SetCurrent(Long index) const { return 0; }
+	virtual Long SetCurrent(Long index) { return 0; }
 };
 #endif //_GLYPH_H

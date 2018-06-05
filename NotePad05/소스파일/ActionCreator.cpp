@@ -3,7 +3,7 @@
 #include "ActionCreator.h"
 #include <afxwin.h>
 #include "KeyAction.h"
-
+#include "NotePad.h"
 #include "HomeKey.h"
 #include "EndKey.h"
 #include "LeftKey.h"
@@ -15,6 +15,7 @@
 #include "BackSpaceKey.h"
 #include "DeleteKey.h"
 #include "EscKey.h"
+#include "IntervalRightKey.h"
 
 
 ActionCreator::ActionCreator() {
@@ -70,5 +71,6 @@ KeyAction* ActionCreator::Create(NotePad* notePad, UINT nChar) {
 	default:
 		break;
 	}
+	
 	return this->keyAction;
 }

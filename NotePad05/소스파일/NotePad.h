@@ -25,6 +25,7 @@ class KeyAction;
 class MouseAction;
 class Positioner;
 class Range;
+class Reverse;
 class NotePad :public CFrameWnd, public Subject {
 public:
 	NotePad();
@@ -37,8 +38,8 @@ public:
 	Glyph* SetLine(Glyph* line);
 	BOOL SetIsComposition(BOOL ret);
 	BOOL GetIsDragging() const;
+	BOOL GetIsRange() const;
 	CPoint GetCursorPoint() const;
-	BOOL GetIsReverse() const;
 	
 private:
 	string name;
@@ -46,6 +47,7 @@ private:
 	Glyph* line;
 	Glyph* glyph;
 	UINT nChar;
+	CFont font; //폰트 선언
 	CPoint cursorPoint;
 	CharacterMatrix* characterMatrix;
 	CaretController* caretController;
@@ -53,6 +55,11 @@ private:
 	MouseAction* mouseAction;
 	Positioner* positioner;
 	Range* range;
+	Reverse* reverse;
+
+	BOOL isComposition = FALSE;
+	BOOL isDragging = FALSE;
+	BOOL isRange = FALSE;
 
 protected:	
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
@@ -66,15 +73,11 @@ protected:
 	afx_msg void OnKillFocus(CWnd *NewWnd);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
-	afx_msg void OnLButtonDulClk(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnClose();
 	DECLARE_MESSAGE_MAP()
 
-private:
-	BOOL isComposition;
-	BOOL isDragging;
-	BOOL isReverse;
 };
 inline BOOL NotePad::GetIsComposition() const {
 	return this->isComposition;
@@ -109,8 +112,8 @@ inline BOOL NotePad::GetIsDragging() const {
 inline CPoint NotePad::GetCursorPoint() const {
 	return this->cursorPoint;
 }
-inline BOOL NotePad::GetIsReverse() const {
-	return this->isReverse;
+inline BOOL NotePad::GetIsRange() const {
+	return this->isRange;
 }
 #endif//_NOTEPAD_H
 

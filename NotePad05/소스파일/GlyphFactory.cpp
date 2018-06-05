@@ -21,10 +21,10 @@ Glyph* GlyphFactory::FactoryCreator(char(*characters)) {
 	Glyph* glyph=NULL;
 
 	if (characters == 0) {
-		glyph = new Paper;
+		glyph = new Paper();
 	}
 	else if (characters[0] == '\r' || characters[0] == '\n') {
-		glyph = new Line;
+		glyph = new Line();
 	}
 	else if (characters[0] > 31 && characters[0] < 128) {
 		glyph = new SingleByteCharacter(characters[0]);

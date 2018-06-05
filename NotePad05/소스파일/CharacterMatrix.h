@@ -18,14 +18,12 @@ public:
 	Long GetHangleWidth() const;
 	Long GetWidths(Long code) const;
 	Long GetHeigh() const;
-	//static CharacterMatrix * GetInstance(NotePad *notepad);
 	CharacterMatrix();
 	CharacterMatrix(NotePad* notePad);
 	CharacterMatrix(const CharacterMatrix& source);
 	~CharacterMatrix();
 	CharacterMatrix& operator=(const CharacterMatrix& source);
 private:
-	//static CharacterMatrix* _instance;
 	Long widths[129];
 	Long heigh;
 	NotePad* notePad;

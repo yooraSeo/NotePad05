@@ -31,6 +31,5 @@ void PriorKey::Action() {
 		}
 		notePad->SetPaper(paper);
 		notePad->SetLine(line);
-		notePad->Notify();
 	}
 }
